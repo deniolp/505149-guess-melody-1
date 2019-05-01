@@ -1,6 +1,6 @@
 import React from 'react';
 
-const App = () => {
+const WelcomeScreen = () => {
   return <section className="welcome">
     <div className="welcome__logo">
       <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
@@ -18,4 +18,4 @@ const App = () => {
   </section>;
 };
 
-export {App};
+export {WelcomeScreen};
