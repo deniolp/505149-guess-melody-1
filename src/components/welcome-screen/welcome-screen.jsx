@@ -18,4 +18,4 @@ const WelcomeScreen = () => {
   </section>;
 };
 
-export {WelcomeScreen};
+export default WelcomeScreen;

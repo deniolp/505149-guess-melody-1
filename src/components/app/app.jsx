@@ -1,8 +1,8 @@
 import React from 'react';
-import WelcomeScreen from '../welcome-screen/welcome-screen';
+import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 
 const App = () => {
   return <WelcomeScreen />;
 };
 
-export {App};
+export default App;
