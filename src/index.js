@@ -3,15 +3,15 @@ import ReactDom from 'react-dom';
 import App from './components/app/app.jsx';
 
 const init = () => {
-  const settings = {
-    gameTime: 7,
-    errorCount: 4,
+  const Settings = {
+    GAMETIME: 7,
+    ERRORCOUNT: 4,
   };
 
   ReactDom.render(
       <App
-        gameTime={settings.gameTime}
-        errorCount={settings.errorCount}
+        gameTime={Settings.GAMETIME}
+        errorCount={Settings.ERRORCOUNT}
       />,
       document.querySelector(`.main`)
   );
