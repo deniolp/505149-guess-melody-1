@@ -6,6 +6,7 @@ it(`App renders correctly`, () => {
   const tree = renderer.create(<App
     gameTime={0}
     errorCount={0}
+    onClick = {jest.fn()}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

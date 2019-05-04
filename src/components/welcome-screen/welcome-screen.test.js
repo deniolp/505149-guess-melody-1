@@ -6,6 +6,7 @@ it(`WelcomeScreen renders correctly`, () => {
   const tree = renderer.create(<WelcomeScreen
     gameTime={0}
     errorCount={0}
+    onClick = {jest.fn()}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();
