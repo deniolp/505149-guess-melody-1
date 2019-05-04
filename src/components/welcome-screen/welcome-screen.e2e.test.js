@@ -5,21 +5,26 @@ import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 
 Enzyme.configure({adapter: new Adapter()});
 
-const clickHandler = jest.fn();
-const welcomeScreen = shallow(
-    <WelcomeScreen
-      gameTime={0}
-      errorCount={0}
-      onClick={clickHandler}
-    />);
+let clickHandler;
+let welcomeScreen;
+let startButton;
+
+beforeEach(() => {
+  clickHandler = jest.fn();
+  welcomeScreen = shallow(
+      <WelcomeScreen
+        gameTime={0}
+        errorCount={0}
+        onClick={clickHandler}
+      />);
+  startButton = welcomeScreen.find(`.welcome__button`);
+});
 
 it(`Should have the button`, () => {
-  const startButton = welcomeScreen.find(`.welcome__button`);
   expect(startButton).toHaveLength(1);
 });
 
 it(`Click on start game button works correctly`, () => {
-  const startButton = welcomeScreen.find(`.welcome__button`);
   startButton.simulate(`click`);
 
   expect(clickHandler).toHaveBeenCalledTimes(1);
