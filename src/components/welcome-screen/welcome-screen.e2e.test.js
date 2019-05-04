@@ -20,12 +20,20 @@ beforeEach(() => {
   startButton = welcomeScreen.find(`.welcome__button`);
 });
 
-it(`Should have the button`, () => {
-  expect(startButton).toHaveLength(1);
+describe(`Before clicking`, () => {
+  it(`should have the button`, () => {
+    expect(startButton).toHaveLength(1);
+  });
+
+  it(`clickHandler should not work`, () => {
+    expect(clickHandler).toHaveBeenCalledTimes(0);
+  });
 });
 
-it(`Click on start game button works correctly`, () => {
-  startButton.simulate(`click`);
+describe(`After clicking`, () => {
+  it(`clickHandler should work correctly`, () => {
+    startButton.simulate(`click`);
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(clickHandler).toHaveBeenCalledTimes(1);
+  });
 });
