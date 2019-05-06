@@ -7,11 +7,13 @@ const init = () => {
     GAMETIME: 7,
     ERRORCOUNT: 4,
   };
+  const startGame = () => null;
 
   ReactDom.render(
       <App
         gameTime={Settings.GAMETIME}
         errorCount={Settings.ERRORCOUNT}
+        onClick={startGame}
       />,
       document.querySelector(`.main`)
   );
