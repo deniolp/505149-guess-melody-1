@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import PropTypes from 'prop-types';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
+import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen.jsx';
 
 class App extends Component {
   constructor(props) {
