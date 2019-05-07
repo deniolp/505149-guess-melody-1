@@ -17,7 +17,7 @@ const ArtistQuestionScreen = ({question, onAnswer}) => {
           <input className="artist__input visually-hidden" type="radio" name="answer" value={`artist-${index}`} id={`artist-${index}`}/>
           <label className="artist__name" htmlFor={`artist-${index}`}>
             <img className="artist__picture" src={item.picture} alt={item.artist}/>
-          Пелагея
+            {item.artist}
           </label>
         </div>)
       }
