@@ -7,7 +7,7 @@ const init = () => {
     GAMETIME: 7,
     ERRORCOUNT: 4,
   };
-  const startGame = () => null;
+  const startGame = () => {};
 
   ReactDom.render(
       <App
