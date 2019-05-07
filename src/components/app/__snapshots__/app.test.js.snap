@@ -90,7 +90,7 @@ exports[`App renders correctly 1`] = `
     </div>
     <button
       className="welcome__button"
-      onClick={[MockFunction]}
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"
