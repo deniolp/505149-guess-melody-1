@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ArtistQuestionScreen = ({question, onAnswer}) => {
+const ArtistQuestionScreen = ({gameTime, question, onAnswer}) => {
   const {answers, song} = question;
 
   return <section className="game game--artist">
@@ -21,7 +21,7 @@ const ArtistQuestionScreen = ({question, onAnswer}) => {
       </svg>
 
       <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-        <span className="timer__mins">05</span>
+        <span className="timer__mins">0{gameTime}</span>
         <span className="timer__dots">:</span>
         <span className="timer__secs">00</span>
       </div>
@@ -67,6 +67,7 @@ ArtistQuestionScreen.propTypes = {
     }).isRequired,
   }).isRequired,
   type: PropTypes.oneOf([`genre`, `artist`]),
+  gameTime: PropTypes.number.isRequired,
 };
 
 

@@ -24,9 +24,8 @@ class App extends Component {
   }
 
   _getScreen(question, onClick) {
+    const {gameTime, errorCount} = this.props;
     if (!question) {
-      const {gameTime, errorCount} = this.props;
-
       return <WelcomeScreen
         gameTime={gameTime}
         errorCount={errorCount}
@@ -37,10 +36,12 @@ class App extends Component {
     switch (question.type) {
       case `genre`: return <GenreQuestionScreen
         question={question}
+        gameTime={gameTime}
         onAnswer={onClick}
       />;
       case `artist`: return <ArtistQuestionScreen
         question={question}
+        gameTime={gameTime}
         onAnswer={onClick}
       />;
     }

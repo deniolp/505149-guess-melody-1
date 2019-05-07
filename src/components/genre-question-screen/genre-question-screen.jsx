@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const GenreQuestionScreen = ({question, onAnswer}) => {
+const GenreQuestionScreen = ({gameTime, question, onAnswer}) => {
   const {answers, genre} = question;
 
   return <section className="game game--genre">
@@ -21,7 +21,7 @@ const GenreQuestionScreen = ({question, onAnswer}) => {
       </svg>
 
       <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-        <span className="timer__mins">05</span>
+        <span className="timer__mins">0{gameTime}</span>
         <span className="timer__dots">:</span>
         <span className="timer__secs">00</span>
       </div>
@@ -66,6 +66,7 @@ GenreQuestionScreen.propTypes = {
     genre: PropTypes.oneOf([`blues`, `rock`, `jazz`]).isRequired,
     type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
   }).isRequired,
+  gameTime: PropTypes.number.isRequired,
 };
 
 export default GenreQuestionScreen;
