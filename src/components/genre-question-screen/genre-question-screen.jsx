@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const GenreQuestionScreen = (props) => {
   const {answers, genre} = props;
@@ -21,6 +22,14 @@ const GenreQuestionScreen = (props) => {
       <button className="game__submit button" type="submit">Ответить</button>
     </form>
   </section>;
+};
+
+GenreQuestionScreen.propTypes = {
+  answers: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    genre: PropTypes.oneOf([`blues`, `rock`, `jazz`]).isRequired,
+  })),
+  genre: PropTypes.oneOf([`blues`, `rock`, `jazz`]).isRequired,
 };
 
 export default GenreQuestionScreen;
