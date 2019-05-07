@@ -11,7 +11,7 @@ const GenreQuestionScreen = (props) => {
         answers.map((item, index) => <div className="track" key={`answer-${index}`}>
           <button className="track__button track__button--play" type="button"></button>
           <div className="track__status">
-            <audio src={item.src}></audio>
+            <audio></audio>
           </div>
           <div className="game__answer">
             <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${index}`} id={`answer-${index}`}/>
