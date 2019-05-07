@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ArtistQuestionScreen = (question, onAnswer) => {
+const ArtistQuestionScreen = ({question, onAnswer}) => {
   const {answers, song} = question;
 
   return <section className="game__screen">
