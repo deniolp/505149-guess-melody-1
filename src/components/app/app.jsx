@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
 import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
 import PropTypes from 'prop-types';
+import GenreQuestionScreen from '../genre-question-screen/genre-question-screen.jsx';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      question: -1,
+    };
+  }
   render() {
-    const {gameTime, errorCount} = this.props;
+    const {questions} = this.props;
+    const {question} = this.state;
 
     return <section className="game game--genre">
       <header className="game__header">
@@ -34,14 +43,38 @@ class App extends Component {
           <div className="wrong"></div>
         </div>
       </header>
-      <WelcomeScreen
+
+      {this._getScreen(questions[question], () => {
+        this.setState = {
+          question: question + 1 >= question.length ? -1 : question + 1,
+        };
+      })}
+    </section>;
+  }
+
+  _getScreen(question, onClick) {
+    if (!question) {
+      const {gameTime, errorCount} = this.props;
+
+      return <WelcomeScreen
         gameTime={gameTime}
         errorCount={errorCount}
-        onClick={() => {
+        onClick={onClick}
+      />;
+    }
 
-        }}
-      />
-    </section>;
+    switch (question.type) {
+      case `genre`: return <GenreQuestionScreen
+        question={question}
+        onAnswer={onClick}
+      />;
+      case `artist`: return <ArtistQuestionScreen
+        question={question}
+        onAnswer={onClick}
+      />;
+    }
+
+    return null;
   }
 }
 
