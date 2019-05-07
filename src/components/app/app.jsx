@@ -45,6 +45,7 @@ App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
   onClick: PropTypes.func,
+  questions: PropTypes.array.isRequired,
 };
 
 export default App;
