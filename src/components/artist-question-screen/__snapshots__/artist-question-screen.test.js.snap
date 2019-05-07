@@ -48,7 +48,8 @@ exports[`ArtistQuestionScreen renders correctly 1`] = `
       <span
         className="timer__mins"
       >
-        05
+        0
+        2
       </span>
       <span
         className="timer__dots"

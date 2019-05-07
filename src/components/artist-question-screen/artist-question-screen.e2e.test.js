@@ -35,6 +35,7 @@ beforeEach(() => {
   artistQuestion = mount(
       <ArtistQuestionScreen
         question={question}
+        gameTime={2}
         onAnswer={onAnswer}
       />
   );

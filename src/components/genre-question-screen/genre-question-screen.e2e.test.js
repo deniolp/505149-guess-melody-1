@@ -24,6 +24,7 @@ it(`When user clicks submit, form is not sent`, () => {
   const onAnswer = jest.fn();
   const genreQuestion = mount(<GenreQuestionScreen
     onAnswer={onAnswer}
+    gameTime={2}
     question={question}
   />);
 

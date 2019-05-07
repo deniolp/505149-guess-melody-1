@@ -32,6 +32,7 @@ describe(`GenreQuestionScreen`, () => {
     const {question} = mock;
     const tree = renderer.create(<GenreQuestionScreen
       question={question}
+      gameTime={2}
       onAnswer={jest.fn()}
     />).toJSON();
 

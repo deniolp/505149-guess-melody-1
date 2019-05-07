@@ -31,6 +31,7 @@ describe(`ArtistQuestionScreen`, () => {
     const {question} = mocks;
     const tree = renderer.create(<ArtistQuestionScreen
       question={question}
+      gameTime={2}
       onAnswer={jest.fn()}
     />).toJSON();
 
