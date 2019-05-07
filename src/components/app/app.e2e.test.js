@@ -5,36 +5,34 @@ import App from './app.jsx';
 
 configure({adapter: new Adapter()});
 
-const mocks = {
-  questions: [
-    {
-      type: `genre`,
-      genre: `rock`,
-      answers: [
-        {
-          src: `path`,
-          genre: `blues`,
-        },
-        {
-          src: `path`,
-          genre: `jazz`,
-        },
-        {
-          src: `path`,
-          genre: `blues`,
-        },
-        {
-          src: `path`,
-          genre: `rock`,
-        }
-      ]
-    }
-  ]
-};
+const questions = [
+  {
+    type: `genre`,
+    genre: `rock`,
+    answers: [
+      {
+        src: `path`,
+        genre: `rock`,
+      },
+    ]
+  },
+  {
+    type: `artist`,
+    song: {
+      artist: `John`,
+      src: ``,
+    },
+    answers: [
+      {
+        picture: ``,
+        artist: `John`,
+      },
+    ],
+  }
+];
 let app;
 
 beforeEach(() => {
-  const {questions} = mocks;
   app = mount(
       <App
         gameTime={0}
@@ -44,11 +42,40 @@ beforeEach(() => {
 });
 
 it(`Onclick on welcome screen switches to the first question`, () => {
+  expect(app.state(`question`)).toEqual(-1);
+
   const startButton = app.find(`.welcome__button`);
   startButton.simulate(`click`);
   app.update();
 
+  expect(app.state(`question`)).toEqual(0);
+
   const title = app.find(`.game__title`);
   expect(title).toHaveLength(1);
-  expect(title.text).indexOf(`rock`).toBeGreaterThanOrEqual(0);
+});
+
+it(`Question answer switches to another question`, () => {
+  app.setState({
+    question: 0,
+  });
+  app.update();
+
+  const form = app.find(`form`);
+  form.simulate(`submit`, {
+    preventDefault() {},
+  });
+  expect(app.state(`question`)).toEqual(1);
+});
+
+it(`Last question answer leads to the first screen`, () => {
+  app.setState({
+    question: questions.length - 1,
+  });
+  app.update();
+
+  const form = app.find(`form`);
+  form.simulate(`change`, {
+    preventDefault() {},
+  });
+  expect(app.state(`question`)).toEqual(-1);
 });
