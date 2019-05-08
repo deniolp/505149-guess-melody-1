@@ -1,4 +1,4 @@
 export default {
-  GAMETIME: 4,
+  GAMETIME: 5,
   ERRORCOUNT: 3,
 };
