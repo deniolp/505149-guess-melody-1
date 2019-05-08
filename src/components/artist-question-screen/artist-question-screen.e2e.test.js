@@ -36,6 +36,7 @@ beforeEach(() => {
       <ArtistQuestionScreen
         question={question}
         gameTime={2}
+        errorCount={3}
         onAnswer={onAnswer}
       />
   );

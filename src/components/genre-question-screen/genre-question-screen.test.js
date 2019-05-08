@@ -33,6 +33,7 @@ describe(`GenreQuestionScreen`, () => {
     const tree = renderer.create(<GenreQuestionScreen
       question={question}
       gameTime={2}
+      errorCount={3}
       onAnswer={jest.fn()}
     />).toJSON();
 

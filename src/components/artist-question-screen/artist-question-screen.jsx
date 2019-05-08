@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import QuestionScreenHeader from '../question-screen-header/question-screen-header.jsx';
 
-const ArtistQuestionScreen = ({gameTime, question, onAnswer}) => {
+const ArtistQuestionScreen = ({gameTime, errorCount, question, onAnswer}) => {
   const {answers, song} = question;
 
   return <section className="game game--artist">
     <QuestionScreenHeader
       gameTime={gameTime}
+      errorCount={errorCount}
     />
     <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>
@@ -45,6 +46,7 @@ ArtistQuestionScreen.propTypes = {
   }).isRequired,
   type: PropTypes.oneOf([`genre`, `artist`]),
   gameTime: PropTypes.number.isRequired,
+  errorCount: PropTypes.number.isRequired,
 };
 
 

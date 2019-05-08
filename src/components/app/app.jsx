@@ -37,11 +37,13 @@ class App extends PureComponent {
       case `genre`: return <GenreQuestionScreen
         question={question}
         gameTime={gameTime}
+        errorCount={errorCount}
         onAnswer={onClick}
       />;
       case `artist`: return <ArtistQuestionScreen
         question={question}
         gameTime={gameTime}
+        errorCount={errorCount}
         onAnswer={onClick}
       />;
     }

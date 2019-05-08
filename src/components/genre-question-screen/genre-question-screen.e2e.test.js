@@ -25,6 +25,7 @@ it(`When user clicks submit, form is not sent`, () => {
   const genreQuestion = mount(<GenreQuestionScreen
     onAnswer={onAnswer}
     gameTime={2}
+    errorCount={3}
     question={question}
   />);
 
