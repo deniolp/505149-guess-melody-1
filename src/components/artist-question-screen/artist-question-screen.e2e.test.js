@@ -1,8 +1,7 @@
-import React from "react";
-import {configure, mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-
-import ArtistQuestionScreen from "./artist-question-screen.jsx";
+import React from 'react';
+import {configure, mount} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import ArtistQuestionScreen from './artist-question-screen.jsx';
 
 configure({adapter: new Adapter()});
 
