@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import QuestionScreenHeader from '../question-screen-header/question-screen-header.jsx';
+import QuestionScreenHeader from '../question-screen-header/question-screen-header';
 
 describe(`QuestionScreenHeader`, () => {
   it(`renders correctly`, () => {

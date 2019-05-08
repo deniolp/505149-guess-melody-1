@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import QuestionScreenHeader from './question-screen-header.jsx';
+import QuestionScreenHeader from './question-screen-header';
 
 configure({adapter: new Adapter()});
 

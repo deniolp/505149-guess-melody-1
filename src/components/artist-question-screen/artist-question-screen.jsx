@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import QuestionScreenHeader from '../question-screen-header/question-screen-header.jsx';
+import QuestionScreenHeader from '../question-screen-header/question-screen-header';
 
 const ArtistQuestionScreen = ({gameTime, errorCount, question, onAnswer}) => {
   const {answers, song} = question;
