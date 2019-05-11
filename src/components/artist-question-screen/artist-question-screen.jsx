@@ -17,7 +17,7 @@ const ArtistQuestionScreen = ({gameTime, errorCount, question, onAnswer}) => {
         <audio src={song.src}></audio>
       </div>
 
-      <form className="game__artist" onChange={onAnswer}>
+      <form className="game__artist" onChange={(evt) => onAnswer(evt.target.value)}>
         {
           answers.map((item, index) => <div className="artist" key={index}>
             <input className="artist__input visually-hidden" type="radio" name="answer" value={`artist-${index}`} id={`artist-${index}`}/>
