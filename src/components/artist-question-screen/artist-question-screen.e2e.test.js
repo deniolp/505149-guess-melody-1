@@ -42,19 +42,21 @@ beforeEach(() => {
 });
 
 describe(`When user clicked`, () => {
-  it(`first option, onAnswer should be called`, () => {
+  it(`first option, onAnswer should be called and right value should be thrown to the callback`, () => {
 
     artistQuestion.find(`.game__artist`).simulate(`change`, {
       target: {value: `artist-0`},
     });
     expect(onAnswer).toHaveBeenCalledTimes(1);
+    expect(onAnswer).toBeCalledWith(`artist-0`);
   });
 
-  it(`second option, onAnswer should be called`, () => {
+  it(`second option, onAnswer should be called and right value should be thrown to the callback`, () => {
 
     artistQuestion.find(`.game__artist`).simulate(`change`, {
       target: {value: `artist-1`},
     });
     expect(onAnswer).toHaveBeenCalledTimes(1);
+    expect(onAnswer).toBeCalledWith(`artist-1`);
   });
 });
