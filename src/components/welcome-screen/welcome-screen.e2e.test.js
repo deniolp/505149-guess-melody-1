@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
+import WelcomeScreen from '../welcome-screen/welcome-screen';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -25,13 +25,13 @@ describe(`Before clicking`, () => {
     expect(startButton).toHaveLength(1);
   });
 
-  it(`clickHandler should not work`, () => {
+  it(`clickHandler should not be called`, () => {
     expect(clickHandler).toHaveBeenCalledTimes(0);
   });
 });
 
 describe(`After clicking`, () => {
-  it(`clickHandler should work correctly`, () => {
+  it(`clickHandler should be called once`, () => {
     startButton.simulate(`click`);
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
