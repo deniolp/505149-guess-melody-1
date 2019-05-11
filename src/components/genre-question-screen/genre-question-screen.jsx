@@ -7,12 +7,15 @@ class GenreQuestionScreen extends PureComponent {
     super(props);
 
     this.state = {
-      selectedAnswer: {},
+      selectedAnswers: {},
     };
+
+    this._onSubmitHandle = this._onSubmitHandle.bind(this);
+    this._onChangeCheckboxHandle = this._onChangeCheckboxHandle.bind(this);
   }
 
   render() {
-    const {question, gameTime, errorCount, onAnswer} = this.props;
+    const {question, gameTime, errorCount} = this.props;
     const {answers, genre} = question;
 
     return <section className="game game--genre">
@@ -24,21 +27,43 @@ class GenreQuestionScreen extends PureComponent {
         <h2 className="game__title">Выберите {genre} треки</h2>
         <form className="game__tracks" onSubmit={this._onSubmitHandle}>
           {
-            answers.map((item, index) => <div className="track" key={`answer-${index}`}>
-              <button className="track__button track__button--play" type="button"></button>
-              <div className="track__status">
-                <audio src={item.src}></audio>
-              </div>
-              <div className="game__answer">
-                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${index}`} id={`answer-${index}`}/>
-                <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
-              </div>
-            </div>)
+            answers.map((item, index) => {
+              const isChecked = this.state.selectedAnswers[`answer-${index}`] ? true : false;
+
+              return <div className="track" key={`answer-${index}`}>
+                <button className="track__button track__button--play" type="button"></button>
+                <div className="track__status">
+                  <audio src={item.src}></audio>
+                </div>
+                <div className="game__answer">
+                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${index}`} id={`answer-${index}`} checked={isChecked} onChange={this._onChangeCheckboxHandle}/>
+                  <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
+                </div>
+              </div>;
+            })
           }
           <button className="game__submit button" type="submit">Ответить</button>
         </form>
       </section>
     </section>;
+  }
+
+  _onSubmitHandle(evt) {
+    evt.preventDefault();
+
+    const answers = Object.keys(this.state.selectedAnswers).filter((key) => this.state.selectedAnswers[key]);
+
+    this.props.onAnswer(answers);
+  }
+
+  _onChangeCheckboxHandle(evt) {
+    const tempObj = {
+      [evt.target.value]: evt.target.checked,
+    };
+
+    this.setState({
+      selectedAnswers: Object.assign({}, this.state.selectedAnswers, tempObj),
+    });
   }
 }
 
