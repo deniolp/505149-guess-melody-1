@@ -51,13 +51,21 @@ class AudioPlayer extends PureComponent {
     );
   }
 
+  componentDidUpdate() {
+    if (this.state.isPlaying) {
+      this._audio.play();
+    } else {
+      this._audio.pause();
+    }
+  }
+
   _onPlayButtonClick() {
     this.setState({isPlaying: !this.state.isPlaying});
   }
 }
 
 AudioPlayer.propTypes = {
-  src: PropTypes.shape.isRequired,
+  src: PropTypes.string.isRequired,
 };
 
 export default AudioPlayer;
