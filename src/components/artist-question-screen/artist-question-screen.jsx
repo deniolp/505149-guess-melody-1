@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import QuestionScreenHeader from '../question-screen-header/question-screen-header';
+import AudioPlayer from '../audio-player/audio-player';
 
 const ArtistQuestionScreen = ({gameTime, errorCount, question, onAnswer}) => {
   const {answers, song} = question;
@@ -13,8 +14,7 @@ const ArtistQuestionScreen = ({gameTime, errorCount, question, onAnswer}) => {
     <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">
-        <button className="track__button track__button--play" type="button"></button>
-        <audio src={song.src}></audio>
+        <AudioPlayer src={song.src}/>
       </div>
 
       <form className="game__artist" onChange={(evt) => onAnswer(evt.target.value)}>

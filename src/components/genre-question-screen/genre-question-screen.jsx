@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import QuestionScreenHeader from '../question-screen-header/question-screen-header';
+import AudioPlayer from '../audio-player/audio-player';
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
@@ -31,10 +32,9 @@ class GenreQuestionScreen extends PureComponent {
               const isChecked = this.state.selectedAnswers[`answer-${index}`] ? true : false;
 
               return <div className="track" key={`answer-${index}`}>
-                <button className="track__button track__button--play" type="button"></button>
-                <div className="track__status">
-                  <audio src={item.src}></audio>
-                </div>
+                <AudioPlayer
+                  src={it.src}
+                />
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${index}`} id={`answer-${index}`} checked={isChecked} onChange={this._onChangeCheckboxHandle}/>
                   <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
