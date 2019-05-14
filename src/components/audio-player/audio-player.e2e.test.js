@@ -22,6 +22,7 @@ beforeEach(() => {
         onPlayButtonClick={clickHandler}
       />);
   playButton = audioPlayer.find(`.track__button`);
+  window.HTMLMediaElement.prototype.pause = () => {};
 });
 
 it(`First click on button makes isPlaying true`, () => {
