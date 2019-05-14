@@ -62,6 +62,15 @@ class AudioPlayer extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    this._audio.oncanplaythrough = null;
+    this._audio.onplay = null;
+    this._audio.onpause = null;
+    this._audio.ontimeupdate = null;
+    this._audio.src = ``;
+    this._audio = null;
+  }
+
   _onPlayButtonClick() {
     this.props.onPlayButtonClick();
     this.setState({isPlaying: !this.state.isPlaying});
