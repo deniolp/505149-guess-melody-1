@@ -29,7 +29,7 @@ class App extends PureComponent {
       return <WelcomeScreen
         gameTime={gameTime}
         errorCount={errorCount}
-        onClick={onClick}
+        onStartButtonClick={onClick}
       />;
     }
 
