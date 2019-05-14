@@ -9,6 +9,7 @@ class GenreQuestionScreen extends PureComponent {
 
     this.state = {
       selectedAnswers: {},
+      activePlayer: -1,
     };
 
     this._onSubmitHandle = this._onSubmitHandle.bind(this);
@@ -34,6 +35,10 @@ class GenreQuestionScreen extends PureComponent {
               return <div className="track" key={`answer-${index}`}>
                 <AudioPlayer
                   src={item.src}
+                  isPlaying={index === this.state.activePlayer}
+                  onPlayButtonClick={() => this.setState({
+                    activePlayer: this.state.activePlayer === index ? -1 : index
+                  })}
                 />
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${index}`} id={`answer-${index}`} checked={isChecked} onChange={this._onChangeCheckboxHandle}/>
