@@ -50,6 +50,10 @@ class AudioPlayer extends PureComponent {
       </React.Fragment>
     );
   }
+
+  _onPlayButtonClick() {
+    this.setState({isPlaying: !this.state.isPlaying});
+  }
 }
 
 AudioPlayer.propTypes = {
