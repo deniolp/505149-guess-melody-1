@@ -13,24 +13,6 @@ class AudioPlayer extends PureComponent {
       isPlaying,
     };
 
-    this._audio.oncanplaythrough = () => this.setState({
-      isLoading: false,
-    });
-
-    this._audio.onplay = () => {
-      this.setState({
-        isPlaying: true,
-      });
-    };
-
-    this._audio.onpause = () => this.setState({
-      isPlaying: false,
-    });
-
-    this._audio.ontimeupdate = () => this.setState({
-      progress: this._audio.currentTime,
-    });
-
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
   }
 
@@ -50,6 +32,26 @@ class AudioPlayer extends PureComponent {
         </div>
       </React.Fragment>
     );
+  }
+
+  componentDidMount() {
+    this._audio.oncanplaythrough = () => this.setState({
+      isLoading: false,
+    });
+
+    this._audio.onplay = () => {
+      this.setState({
+        isPlaying: true,
+      });
+    };
+
+    this._audio.onpause = () => this.setState({
+      isPlaying: false,
+    });
+
+    this._audio.ontimeupdate = () => this.setState({
+      progress: this._audio.currentTime,
+    });
   }
 
   componentDidUpdate() {
