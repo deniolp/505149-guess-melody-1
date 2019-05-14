@@ -25,19 +25,14 @@ beforeEach(() => {
   window.HTMLMediaElement.prototype.pause = () => {};
 });
 
-it(`First click on button makes isPlaying true`, () => {
+it(`Click on button makes isPlaying changed`, () => {
   audioPlayer.setState({isLoading: false});
 
   playButton.simulate(`click`, {preventDefault() {}});
   audioPlayer.update();
 
   expect(audioPlayer.state(`isPlaying`)).toEqual(true);
-  playButton.simulate(`click`, {preventDefault() {}});
-  audioPlayer.update();
-  expect(audioPlayer.state(`isPlaying`)).toEqual(false);
-});
 
-it(`Next click on button makes isPlaying false`, () => {
   playButton.simulate(`click`, {preventDefault() {}});
   audioPlayer.update();
   expect(audioPlayer.state(`isPlaying`)).toEqual(false);
