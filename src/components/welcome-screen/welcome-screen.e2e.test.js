@@ -15,7 +15,7 @@ beforeEach(() => {
       <WelcomeScreen
         gameTime={0}
         errorCount={0}
-        onClick={clickHandler}
+        onStartButtonClick={clickHandler}
       />);
   startButton = welcomeScreen.find(`.welcome__button`);
 });
