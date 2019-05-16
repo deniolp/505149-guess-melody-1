@@ -19,12 +19,14 @@ class App extends PureComponent {
 
     switch (currentQuestion.type) {
       case `genre`: return <GenreQuestionScreen
+        key={`Genre-question-screen-${question}`}
         question={currentQuestion}
         gameTime={gameTime}
         errorCount={errorCount}
         onAnswer={onClick}
       />;
       case `artist`: return <ArtistQuestionScreen
+        key={`Artist-question-screen-${question}`}
         question={currentQuestion}
         gameTime={gameTime}
         errorCount={errorCount}
