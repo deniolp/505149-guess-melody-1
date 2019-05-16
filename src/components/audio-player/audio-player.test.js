@@ -8,7 +8,11 @@ describe(`AudioPlayer`, () => {
       src={`path.mp3`}
       isPlaying={true}
       onPlayButtonClick={jest.fn()}
-    />).toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

@@ -35,7 +35,11 @@ describe(`GenreQuestionScreen`, () => {
       gameTime={2}
       errorCount={3}
       onAnswer={jest.fn()}
-    />).toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
