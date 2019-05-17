@@ -24,7 +24,8 @@ class App extends PureComponent {
       />;
     }
 
-    const {onUserAnswer, mistakes, errorCount, step, gameTime} = this.props;
+    const {onUserAnswer, mistakes, errorCount, step, gameTime, questions} = this.props;
+    const length = questions.length;
 
     switch (question.type) {
       case `genre`: return <GenreQuestionScreen
@@ -32,7 +33,7 @@ class App extends PureComponent {
         question={question}
         gameTime={gameTime}
         errorCount={errorCount}
-        onAnswer={(userAnswer) => onUserAnswer(question, userAnswer, errorCount, mistakes)}
+        onAnswer={(userAnswer) => onUserAnswer(question, step, userAnswer, errorCount, mistakes, length)}
       />;
 
       case `artist`: return <ArtistQuestionScreen
@@ -40,7 +41,7 @@ class App extends PureComponent {
         question={question}
         gameTime={gameTime}
         errorCount={errorCount}
-        onAnswer={(userAnswer) => onUserAnswer(question, userAnswer, errorCount, mistakes)}
+        onAnswer={(userAnswer) => onUserAnswer(question, step, userAnswer, errorCount, mistakes, length)}
       />;
     }
 
@@ -67,9 +68,9 @@ const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 const mapDispatchToProps = (dispatch) => ({
   onWelcomeScreenClick: () => dispatch(ActionCreator.incrementStep()),
 
-  onUserAnswer: (question, userAnswer, errorCount, mistakes) => {
+  onUserAnswer: (question, step, userAnswer, errorCount, mistakes, length) => {
     dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistake(question, userAnswer, errorCount, mistakes));
+    dispatch(ActionCreator.incrementMistake(question, length, userAnswer, errorCount, mistakes, step));
   }
 });
 

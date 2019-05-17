@@ -16,7 +16,7 @@ const ActionCreator = {
     payload: 1,
   }),
 
-  incrementMistake: (question, userAnswer, errorCount, mistakes) => {
+  incrementMistake: (question, questionsLength, userAnswer, errorCount, mistakes, step) => {
     let isAnswerCorrect = false;
 
     switch (question.type) {
@@ -28,7 +28,7 @@ const ActionCreator = {
         break;
     }
 
-    if (!isAnswerCorrect && mistakes + 1 >= errorCount) {
+    if (!isAnswerCorrect && mistakes + 1 >= errorCount || step >= questionsLength - 1) {
       return {
         type: `RESET`,
       };
