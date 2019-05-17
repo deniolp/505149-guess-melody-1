@@ -42,7 +42,7 @@ beforeEach(() => {
       <GenreQuestionScreen
         question={question}
         gameTime={2}
-        errorCount={3}
+        mistakes={1}
         onAnswer={onAnswer}
       />
   );

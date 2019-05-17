@@ -68,9 +68,6 @@ exports[`QuestionScreenHeader renders correctly 1`] = `
     <div
       className="wrong"
     />
-    <div
-      className="wrong"
-    />
   </div>
 </header>
 `;

@@ -1,11 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import QuestionScreenHeader from '../question-screen-header/question-screen-header';
+import MistakeSigns from '../mistake-signs/mistake-signs';
 
 describe(`QuestionScreenHeader`, () => {
   it(`renders correctly`, () => {
-    const tree = renderer.create(<QuestionScreenHeader
-      gameTime={3}
+    const tree = renderer.create(<MistakeSigns
       mistakes={2}
     />).toJSON();
 

@@ -36,8 +36,8 @@ beforeEach(() => {
       <ArtistQuestionScreen
         question={question}
         gameTime={2}
-        errorCount={3}
         onAnswer={onAnswer}
+        mistakes={1}
       />
   );
   inputs = artistQuestion.find(`input`);

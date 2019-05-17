@@ -33,7 +33,7 @@ describe(`GenreQuestionScreen`, () => {
     const tree = renderer.create(<GenreQuestionScreen
       question={question}
       gameTime={2}
-      errorCount={3}
+      mistakes={2}
       onAnswer={jest.fn()}
     />, {
       createNodeMock: () => {
