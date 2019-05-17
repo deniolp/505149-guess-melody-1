@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
-import ActionCreator from '../../reducer';
+import {ActionCreator} from '../../reducer';
 
 class App extends PureComponent {
   render() {
@@ -70,6 +70,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementMistake(question, userAnswer, errorCount, mistakes));
   }
 });
+
+export {App};
 
 export default connect(mapSateToProps,
     mapDispatchToProps
