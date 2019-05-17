@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class QuestionScreenHeader extends PureComponent {
   render() {
-    const {gameTime, errorCount} = this.props;
+    const {gameTime, mistakes} = this.props;
 
     return <header className="game__header">
       <a className="game__back" href="#">
@@ -27,23 +27,23 @@ class QuestionScreenHeader extends PureComponent {
       </div>
 
       <div className="game__mistakes">
-        {this._getAttemptsElements(errorCount)}
+        {this._showAmountOfMistakes(mistakes)}
       </div>
     </header>;
   }
 
-  _getAttemptsElements(count) {
-    const attemptElements = [];
+  _showAmountOfMistakes(count) {
+    const mistakesElements = [];
     for (let i = 0; i < count; i++) {
-      attemptElements.push(<div className="wrong" key={i}></div>);
+      mistakesElements.push(<div className="wrong" key={i}></div>);
     }
-    return attemptElements;
+    return mistakesElements;
   }
 }
 
 QuestionScreenHeader.propTypes = {
   gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
 };
 
 export default QuestionScreenHeader;

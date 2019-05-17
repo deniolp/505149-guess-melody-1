@@ -32,7 +32,7 @@ class App extends PureComponent {
         key={`Genre-question-screen-${step}`}
         question={question}
         gameTime={gameTime}
-        errorCount={errorCount}
+        mistakes={mistakes}
         onAnswer={(userAnswer) => onUserAnswer(question, step, userAnswer, errorCount, mistakes, length)}
       />;
 
@@ -40,7 +40,7 @@ class App extends PureComponent {
         key={`Artist-question-screen-${step}`}
         question={question}
         gameTime={gameTime}
-        errorCount={errorCount}
+        mistakes={mistakes}
         onAnswer={(userAnswer) => onUserAnswer(question, step, userAnswer, errorCount, mistakes, length)}
       />;
     }

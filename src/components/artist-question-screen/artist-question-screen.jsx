@@ -13,14 +13,14 @@ class ArtistQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {gameTime, errorCount, question, onAnswer} = this.props;
+    const {gameTime, mistakes, question, onAnswer} = this.props;
     const {answers, song} = question;
     const {isPlaying} = this.state;
 
     return <section className="game game--artist">
       <QuestionScreenHeader
         gameTime={gameTime}
-        errorCount={errorCount}
+        mistakes={mistakes}
       />
       <section className="game__screen">
         <h2 className="game__title">Кто исполняет эту песню?</h2>
@@ -69,7 +69,7 @@ ArtistQuestionScreen.propTypes = {
   }).isRequired,
   type: PropTypes.oneOf([`genre`, `artist`]),
   gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
 };
 
 

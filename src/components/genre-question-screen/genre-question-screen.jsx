@@ -16,13 +16,13 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {question, gameTime, errorCount, onAnswer} = this.props;
+    const {question, gameTime, mistakes, onAnswer} = this.props;
     const {answers, genre} = question;
 
     return <section className="game game--genre">
       <QuestionScreenHeader
         gameTime={gameTime}
-        errorCount={errorCount}
+        mistakes={mistakes}
       />
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
@@ -78,7 +78,7 @@ GenreQuestionScreen.propTypes = {
     type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
   }).isRequired,
   gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
 };
 
 export default GenreQuestionScreen;
