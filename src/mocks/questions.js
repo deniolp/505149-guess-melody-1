@@ -64,4 +64,25 @@ export default [
       }
     ],
   },
+  {
+    type: `artist`,
+    song: {
+      artist: `Zemfira`,
+      src: `https://upload.wikimedia.org/wikipedia/commons/0/06/United_States_Navy_Band_-_Der_er_et_yndigt_land.ogg`
+    },
+    answers: [
+      {
+        picture: `http://placehold.it/134x134`,
+        artist: `Led Zeppelin`,
+      },
+      {
+        picture: `http://placehold.it/134x134`,
+        artist: `Zemfira`,
+      },
+      {
+        picture: `http://placehold.it/134x134`,
+        artist: `Kurt Cobain`,
+      }
+    ],
+  },
 ];
