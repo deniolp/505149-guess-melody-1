@@ -9,39 +9,38 @@ import {ActionCreator} from '../../reducer';
 
 class App extends PureComponent {
   render() {
-    const {questions, step, errorCount, mistakes} = this.props;
+    const {questions, step} = this.props;
 
-    return this._getScreen(step, (userAnswer) => {
-      this.props.onUserAnswer(questions[step], userAnswer, errorCount, mistakes);
-    });
+    return this._getScreen(questions[step]);
   }
 
-  _getScreen(step, onClick) {
-    const {gameTime, errorCount, questions} = this.props;
-    const currentQuestion = questions[step];
-
-    if (step === -1) {
+  _getScreen(question) {
+    if (!question) {
+      const {errorCount, gameTime, onWelcomeScreenClick} = this.props;
       return <WelcomeScreen
         gameTime={gameTime}
         errorCount={errorCount}
-        onStartButtonClick={onClick}
+        onStartButtonClick={onWelcomeScreenClick}
       />;
     }
 
-    switch (currentQuestion.type) {
+    const {onUserAnswer, mistakes, errorCount, step, gameTime} = this.props;
+
+    switch (question.type) {
       case `genre`: return <GenreQuestionScreen
         key={`Genre-question-screen-${step}`}
-        question={currentQuestion}
+        question={question}
         gameTime={gameTime}
         errorCount={errorCount}
-        onAnswer={onClick}
+        onAnswer={(userAnswer) => onUserAnswer(question, userAnswer, errorCount, mistakes)}
       />;
+
       case `artist`: return <ArtistQuestionScreen
         key={`Artist-question-screen-${step}`}
-        question={currentQuestion}
+        question={question}
         gameTime={gameTime}
         errorCount={errorCount}
-        onAnswer={onClick}
+        onAnswer={(userAnswer) => onUserAnswer(question, userAnswer, errorCount, mistakes)}
       />;
     }
 
@@ -57,6 +56,7 @@ App.propTypes = {
   step: PropTypes.number.isRequired,
   mistakes: PropTypes.number.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
+  onWelcomeScreenClick: PropTypes.func.isRequired,
 };
 
 const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -65,6 +65,8 @@ const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  onWelcomeScreenClick: () => dispatch(ActionCreator.incrementStep()),
+
   onUserAnswer: (question, userAnswer, errorCount, mistakes) => {
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistake(question, userAnswer, errorCount, mistakes));

@@ -21,7 +21,7 @@ const ActionCreator = {
   incrementMistake: (question, userAnswer, errorCount, mistakes) => {
     let isAnswerCorrect = false;
 
-    switch (question) {
+    switch (question.type) {
       case `genre`:
         isAnswerCorrect = isGenreAnswerCorrect(userAnswer, question);
         break;
