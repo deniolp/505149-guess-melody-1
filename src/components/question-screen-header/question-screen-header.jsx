@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import MistakeSigns from '../mistake-signs/mistake-signs';
 
 class QuestionScreenHeader extends PureComponent {
   render() {
@@ -25,19 +26,8 @@ class QuestionScreenHeader extends PureComponent {
         <span className="timer__dots">:</span>
         <span className="timer__secs">00</span>
       </div>
-
-      <div className="game__mistakes">
-        {this._showAmountOfMistakes(mistakes)}
-      </div>
+      <MistakeSigns mistakes={mistakes}></MistakeSigns>
     </header>;
-  }
-
-  _showAmountOfMistakes(count) {
-    const mistakesElements = [];
-    for (let i = 0; i < count; i++) {
-      mistakesElements.push(<div className="wrong" key={i}></div>);
-    }
-    return mistakesElements;
   }
 }
 
