@@ -4,16 +4,11 @@ const initialState = {
 };
 
 const isArtistAnswerCorrect = (userAnswer, question) => {
-  console.log(userAnswer, question);
   return userAnswer.artist === question.song.artist;
 };
 
 
-const isGenreAnswerCorrect = (userAnswer, question) => {
-  userAnswer.every((it, i) => it === (
-    question.answers[i].genre === question.genre
-  ));
-};
+const isGenreAnswerCorrect = (userAnswer, question) => userAnswer.every((it, i) => it === (question.answers[i].genre === question.genre));
 
 const ActionCreator = {
   incrementStep: () => ({
