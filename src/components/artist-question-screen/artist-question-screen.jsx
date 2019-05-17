@@ -41,7 +41,7 @@ class ArtistQuestionScreen extends PureComponent {
                 name="answer"
                 value={`artist-${index}`}
                 id={`artist-${index}`}
-                onChange={() => onAnswer(item)}
+                onClick={() => onAnswer(item)}
               />
               <label className="artist__name" htmlFor={`artist-${index}`}>
                 <img className="artist__picture" src={item.picture} alt={item.artist}/>

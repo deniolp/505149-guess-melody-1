@@ -73,8 +73,8 @@ it(`Last question answer leads to the first screen`, () => {
   });
   app.update();
 
-  const form = app.find(`form`);
-  form.simulate(`change`, {
+  const form = app.find(`input`);
+  form.simulate(`click`, {
     preventDefault() {},
   });
   expect(app.state(`question`)).toEqual(-1);
