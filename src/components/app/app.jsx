@@ -5,13 +5,14 @@ import {connect} from 'react-redux';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
+import ActionCreator from '../../reducer';
 
 class App extends PureComponent {
   render() {
-    const {questions, step} = this.props;
+    const {questions, step, errorCount, mistakes} = this.props;
 
     return this._getScreen(step, (userAnswer) => {
-      this.props.onUserAnswer(questions[step], userAnswer);
+      this.props.onUserAnswer(questions[step], userAnswer, errorCount, mistakes);
     });
   }
 
@@ -64,11 +65,9 @@ const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onUserAnswer: (question, userAnswer) => {
-    dispatch({
-      type: `INCREMENT_STEP`,
-      payload: 1,
-    });
+  onUserAnswer: (question, userAnswer, errorCount, mistakes) => {
+    dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistake(question, userAnswer, errorCount, mistakes));
   }
 });
 
