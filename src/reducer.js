@@ -3,14 +3,17 @@ const initialState = {
   mistakes: 0,
 };
 
-const isArtistAnswerCorrect = (userAnswer, question) =>
-  userAnswer.artist === question.song.artist;
+const isArtistAnswerCorrect = (userAnswer, question) => {
+  console.log(userAnswer, question);
+  return userAnswer.artist === question.song.artist;
+};
 
 
-const isGenreAnswerCorrect = (userAnswer, question) =>
+const isGenreAnswerCorrect = (userAnswer, question) => {
   userAnswer.every((it, i) => it === (
     question.answers[i].genre === question.genre
   ));
+};
 
 const ActionCreator = {
   incrementStep: () => ({
@@ -38,7 +41,7 @@ const ActionCreator = {
 
     return {
       type: `INCREMENT_MISTAKES`,
-      payload: isAnswerCorrect ? 1 : 0,
+      payload: isAnswerCorrect ? 0 : 1,
     };
   }
 };
