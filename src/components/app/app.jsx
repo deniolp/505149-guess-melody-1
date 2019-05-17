@@ -7,8 +7,16 @@ import GenreQuestionScreen from '../genre-question-screen/genre-question-screen'
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 
 class App extends PureComponent {
-  static getScreen(props, onClick) {
-    const {gameTime, errorCount, questions, step} = props;
+  render() {
+    const {questions, step} = this.props;
+
+    return this._getScreen(step, (userAnswer) => {
+      this.props.onUserAnswer(questions[step], userAnswer);
+    });
+  }
+
+  _getScreen(step, onClick) {
+    const {gameTime, errorCount, questions} = this.props;
     const currentQuestion = questions[step];
 
     if (step === -1) {
@@ -37,14 +45,6 @@ class App extends PureComponent {
     }
 
     return null;
-  }
-
-  render() {
-    const {questions, step} = this.props;
-
-    return App.getScreen(this.props, (userAnswer) => {
-      this.props.onUserAnswer(questions[step], userAnswer);
-    });
   }
 }
 
