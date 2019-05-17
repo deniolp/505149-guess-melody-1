@@ -3,6 +3,15 @@ const initialState = {
   mistakes: 0,
 };
 
+const isArtistAnswerCorrect = (userAnswer, question) =>
+  userAnswer.artist === question.song.artist;
+
+
+const isGenreAnswerCorrect = (userAnswer, question) =>
+  userAnswer.every((it, i) => it === (
+    question.answers[i].genre === question.genre
+  ));
+
 const ActionCreator = {
   incrementStep: () => ({
     type: `INCREMENT_STEP`,
@@ -14,10 +23,10 @@ const ActionCreator = {
 
     switch (question) {
       case `genre`:
-        isAnswerCorrect = false;
+        isAnswerCorrect = isGenreAnswerCorrect(userAnswer, question);
         break;
       case `artist`:
-        isAnswerCorrect = true;
+        isAnswerCorrect = isArtistAnswerCorrect(userAnswer, question);
         break;
     }
 
