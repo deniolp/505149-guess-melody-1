@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from '../app/app';
+import {App} from '../app/app';
 
 const mocks = {
   questions: [
@@ -33,10 +33,13 @@ describe(`App`, () => {
   it(`renders correctly`, () => {
     const {questions} = mocks;
     const tree = renderer.create(<App
+      mistakes={0}
       gameTime={0}
-      errorCount={0}
       questions={questions}
-      onClick = {jest.fn()}
+      step={-1}
+      onUserAnswer={jest.fn()}
+      onWelcomeScreenClick={jest.fn()}
+      errorCount={0}
     />).toJSON();
 
     expect(tree).toMatchSnapshot();

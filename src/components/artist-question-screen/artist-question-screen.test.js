@@ -32,9 +32,13 @@ describe(`ArtistQuestionScreen`, () => {
     const tree = renderer.create(<ArtistQuestionScreen
       question={question}
       gameTime={2}
-      errorCount={3}
+      mistakes={2}
       onAnswer={jest.fn()}
-    />).toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

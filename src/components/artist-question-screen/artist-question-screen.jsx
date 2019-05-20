@@ -13,14 +13,14 @@ class ArtistQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {gameTime, errorCount, question, onAnswer} = this.props;
+    const {gameTime, mistakes, question, onAnswer} = this.props;
     const {answers, song} = question;
     const {isPlaying} = this.state;
 
     return <section className="game game--artist">
       <QuestionScreenHeader
         gameTime={gameTime}
-        errorCount={errorCount}
+        mistakes={mistakes}
       />
       <section className="game__screen">
         <h2 className="game__title">Кто исполняет эту песню?</h2>
@@ -32,10 +32,17 @@ class ArtistQuestionScreen extends PureComponent {
           />
         </div>
 
-        <form className="game__artist" onChange={(evt) => onAnswer(evt.target.value)}>
+        <form className="game__artist">
           {
             answers.map((item, index) => <div className="artist" key={index}>
-              <input className="artist__input visually-hidden" type="radio" name="answer" value={`artist-${index}`} id={`artist-${index}`}/>
+              <input
+                className="artist__input visually-hidden"
+                type="radio"
+                name="answer"
+                value={`artist-${index}`}
+                id={`artist-${index}`}
+                onClick={() => onAnswer(item)}
+              />
               <label className="artist__name" htmlFor={`artist-${index}`}>
                 <img className="artist__picture" src={item.picture} alt={item.artist}/>
                 {item.artist}
@@ -62,7 +69,7 @@ ArtistQuestionScreen.propTypes = {
   }).isRequired,
   type: PropTypes.oneOf([`genre`, `artist`]),
   gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
 };
 
 

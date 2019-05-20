@@ -26,6 +26,7 @@ const mocks = {
 };
 let artistQuestion;
 let onAnswer;
+let inputs;
 
 beforeEach(() => {
   const {question} = mocks;
@@ -35,28 +36,35 @@ beforeEach(() => {
       <ArtistQuestionScreen
         question={question}
         gameTime={2}
-        errorCount={3}
         onAnswer={onAnswer}
+        mistakes={1}
       />
   );
+  inputs = artistQuestion.find(`input`);
 });
 
 describe(`When user clicked`, () => {
   it(`first option, onAnswer should be called and right value should be thrown to the callback`, () => {
 
-    artistQuestion.find(`.game__artist`).simulate(`change`, {
-      target: {value: `artist-0`},
+    inputs.at(0).simulate(`click`, {
+      preventDefault() {}
     });
     expect(onAnswer).toHaveBeenCalledTimes(1);
-    expect(onAnswer).toBeCalledWith(`artist-0`);
+    expect(onAnswer).toBeCalledWith({
+      picture: `path.jpg`,
+      artist: `John`,
+    });
   });
 
   it(`second option, onAnswer should be called and right value should be thrown to the callback`, () => {
 
-    artistQuestion.find(`.game__artist`).simulate(`change`, {
-      target: {value: `artist-1`},
+    inputs.at(1).simulate(`click`, {
+      preventDefault() {}
     });
     expect(onAnswer).toHaveBeenCalledTimes(1);
-    expect(onAnswer).toBeCalledWith(`artist-1`);
+    expect(onAnswer).toBeCalledWith({
+      picture: `path.jpg`,
+      artist: `Jack`,
+    });
   });
 });

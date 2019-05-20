@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import MistakeSigns from '../mistake-signs/mistake-signs';
 
 class QuestionScreenHeader extends PureComponent {
   render() {
-    const {gameTime, errorCount} = this.props;
+    const {gameTime, mistakes} = this.props;
 
     return <header className="game__header">
       <a className="game__back" href="#">
@@ -25,25 +26,14 @@ class QuestionScreenHeader extends PureComponent {
         <span className="timer__dots">:</span>
         <span className="timer__secs">00</span>
       </div>
-
-      <div className="game__mistakes">
-        {this._getAttemptsElements(errorCount)}
-      </div>
+      <MistakeSigns mistakes={mistakes}></MistakeSigns>
     </header>;
-  }
-
-  _getAttemptsElements(count) {
-    const attemptElements = [];
-    for (let i = 0; i < count; i++) {
-      attemptElements.push(<div className="wrong" key={i}></div>);
-    }
-    return attemptElements;
   }
 }
 
 QuestionScreenHeader.propTypes = {
   gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
+  mistakes: PropTypes.number.isRequired,
 };
 
 export default QuestionScreenHeader;

@@ -1,17 +1,17 @@
 import React from 'react';
-import {configure, shallow} from 'enzyme';
+import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import QuestionScreenHeader from './question-screen-header';
 
 configure({adapter: new Adapter()});
 
 it(`Right amount of elements with attempts after rendering`, () => {
-  const screenHeader = shallow(<QuestionScreenHeader
+  const screenHeader = mount(<QuestionScreenHeader
     gameTime={2}
-    errorCount={3}
+    mistakes={2}
   />);
 
   const attemptDiv = screenHeader.find(`.wrong`);
 
-  expect(attemptDiv).toHaveLength(3);
+  expect(attemptDiv).toHaveLength(2);
 });
