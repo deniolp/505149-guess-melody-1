@@ -7,8 +7,9 @@ import GenreQuestionScreen from '../genre-question-screen/genre-question-screen'
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import {ActionCreator} from '../../reducer';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import withSelectedAnswers from '../../hocs/with-selected-answers/with-selected-answers';
 
-const GenreQuestionScreenWrapped = withActivePlayer(GenreQuestionScreen);
+const GenreQuestionScreenWrapped = withSelectedAnswers(withActivePlayer(GenreQuestionScreen));
 
 class App extends PureComponent {
   render() {
