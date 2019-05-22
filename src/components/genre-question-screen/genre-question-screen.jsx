@@ -11,12 +11,11 @@ class GenreQuestionScreen extends PureComponent {
 
     this.state = {
       selectedAnswers: new Array(answers.length).fill(false),
-      activePlayer: -1,
     };
   }
 
   render() {
-    const {question, gameTime, mistakes, onAnswer} = this.props;
+    const {activePlayer, question, gameTime, mistakes, onAnswer, onPlayButtonClick} = this.props;
     const {answers, genre} = question;
 
     return <section className="game game--genre">
@@ -35,10 +34,8 @@ class GenreQuestionScreen extends PureComponent {
               return <div className="track" key={`answer-${index}`}>
                 <AudioPlayer
                   src={item.src}
-                  isPlaying={index === this.state.activePlayer}
-                  onPlayButtonClick={() => this.setState({
-                    activePlayer: this.state.activePlayer === index ? -1 : index
-                  })}
+                  isPlaying={index === activePlayer}
+                  onPlayButtonClick={() => onPlayButtonClick(index)}
                 />
                 <div className="game__answer">
                   <input
@@ -68,7 +65,9 @@ class GenreQuestionScreen extends PureComponent {
 }
 
 GenreQuestionScreen.propTypes = {
+  activePlayer: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,
