@@ -5,7 +5,7 @@ import AudioPlayer from '../audio-player/audio-player';
 
 class GenreQuestionScreen extends PureComponent {
   render() {
-    const {activePlayer, question, gameTime, mistakes, onAnswer, onPlayButtonClick, onChange} = this.props;
+    const {activePlayer, question, gameTime, mistakes, onAnswer, onPlayButtonClick, selectedAnswers, onChange} = this.props;
     const {answers, genre} = question;
 
     return <section className="game game--genre">
@@ -32,6 +32,7 @@ class GenreQuestionScreen extends PureComponent {
                     className="game__input visually-hidden"
                     type="checkbox"
                     name="answer"
+                    checked={selectedAnswers[index]}
                     value={`answer-${index}`}
                     id={`answer-${index}`}
                     onChange={() => onChange(index)}/>
@@ -62,6 +63,7 @@ GenreQuestionScreen.propTypes = {
   }).isRequired,
   gameTime: PropTypes.number.isRequired,
   mistakes: PropTypes.number.isRequired,
+  selectedAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
 };
 
 export default GenreQuestionScreen;
