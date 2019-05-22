@@ -38,6 +38,7 @@ beforeEach(() => {
         gameTime={2}
         onAnswer={onAnswer}
         mistakes={1}
+        renderPlayer={jest.fn()}
       />
   );
   inputs = artistQuestion.find(`input`);

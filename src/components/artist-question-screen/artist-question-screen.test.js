@@ -34,6 +34,7 @@ describe(`ArtistQuestionScreen`, () => {
       gameTime={2}
       mistakes={2}
       onAnswer={jest.fn()}
+      renderPlayer={jest.fn()}
     />, {
       createNodeMock: () => {
         return {};
