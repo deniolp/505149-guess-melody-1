@@ -46,9 +46,8 @@ it(`When user clicks submit, form is not sent`, () => {
         gameTime={2}
         mistakes={1}
         onAnswer={onAnswer}
-        activePlayer={-1}
         onChange={jest.fn()}
-        onPlayButtonClick={jest.fn()}
+        renderPlayer={jest.fn()}
         selectedAnswers={[]}
       />
   );
@@ -73,9 +72,8 @@ it(`When component is rendered, inputs are synchronized with prop.selectedAnswer
         gameTime={2}
         mistakes={1}
         onAnswer={onAnswer}
-        activePlayer={-1}
         onChange={jest.fn()}
-        onPlayButtonClick={jest.fn()}
+        renderPlayer={jest.fn()}
       />
   );
   inputs = genreQuestion.dive().find(`input`);
@@ -106,9 +104,8 @@ it(`The user's answer passed to callback and it is synchronized with prop.select
         gameTime={2}
         mistakes={1}
         onAnswer={onAnswer}
-        activePlayer={-1}
         onChange={jest.fn()}
-        onPlayButtonClick={jest.fn()}
+        renderPlayer={jest.fn()}
         selectedAnswers={[false, false, true, false]}
       />
   );
