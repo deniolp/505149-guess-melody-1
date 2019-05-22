@@ -4,7 +4,7 @@ import QuestionScreenHeader from '../question-screen-header/question-screen-head
 
 class GenreQuestionScreen extends PureComponent {
   render() {
-    const {question, gameTime, mistakes, onAnswer, renderPlayer, selectedAnswers, onChange} = this.props;
+    const {question, gameTime, mistakes, onAnswer, renderAnswer, selectedAnswers, onChange} = this.props;
     const {answers, genre} = question;
 
     return <section className="game game--genre">
@@ -21,7 +21,7 @@ class GenreQuestionScreen extends PureComponent {
           {
             answers.map((item, index) => {
               return <div className="track" key={`answer-${index}`}>
-                {renderPlayer(item, index)}
+                {renderAnswer(item, index)}
                 <div className="game__answer">
                   <input
                     className="game__input visually-hidden"
@@ -46,7 +46,7 @@ class GenreQuestionScreen extends PureComponent {
 GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
+  renderAnswer: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,

@@ -8,8 +8,14 @@ import ArtistQuestionScreen from '../artist-question-screen/artist-question-scre
 import {ActionCreator} from '../../reducer';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player';
 import withSelectedAnswers from '../../hocs/with-selected-answers/with-selected-answers';
+import withTransformedProps from '../../hocs/with-transformed-props/with-transformed-props';
 
-const GenreQuestionScreenWrapped = withSelectedAnswers(withActivePlayer(GenreQuestionScreen));
+const GenreQuestionScreenWrapped = withSelectedAnswers(withActivePlayer(
+    withTransformedProps((props) => {
+      return Object.assign({}, props, {
+        renderAnswer: props.renderPlayer,
+      });
+    })(GenreQuestionScreen)));
 
 class App extends PureComponent {
   render() {

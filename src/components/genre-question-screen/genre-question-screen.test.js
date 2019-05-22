@@ -36,7 +36,7 @@ describe(`GenreQuestionScreen`, () => {
       mistakes={2}
       onAnswer={jest.fn()}
       onChange={jest.fn()}
-      renderPlayer={jest.fn()}
+      renderAnswer={jest.fn()}
       selectedAnswers={[false, false, false, false]}
     />, {
       createNodeMock: () => {
