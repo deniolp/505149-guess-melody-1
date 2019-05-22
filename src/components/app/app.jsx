@@ -6,6 +6,9 @@ import WelcomeScreen from '../welcome-screen/welcome-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import {ActionCreator} from '../../reducer';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+
+const GenreQuestionScreenWrapped = withActivePlayer(GenreQuestionScreen);
 
 class App extends PureComponent {
   render() {
@@ -28,7 +31,7 @@ class App extends PureComponent {
     const length = questions.length;
 
     switch (question.type) {
-      case `genre`: return <GenreQuestionScreen
+      case `genre`: return <GenreQuestionScreenWrapped
         key={`Genre-question-screen-${step}`}
         question={question}
         gameTime={gameTime}
