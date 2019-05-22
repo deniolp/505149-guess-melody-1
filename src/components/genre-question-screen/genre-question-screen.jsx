@@ -1,11 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import QuestionScreenHeader from '../question-screen-header/question-screen-header';
-import AudioPlayer from '../audio-player/audio-player';
 
 class GenreQuestionScreen extends PureComponent {
   render() {
-    const {activePlayer, question, gameTime, mistakes, onAnswer, onPlayButtonClick, selectedAnswers, onChange} = this.props;
+    const {question, gameTime, mistakes, onAnswer, renderPlayer, selectedAnswers, onChange} = this.props;
     const {answers, genre} = question;
 
     return <section className="game game--genre">
@@ -22,11 +21,7 @@ class GenreQuestionScreen extends PureComponent {
           {
             answers.map((item, index) => {
               return <div className="track" key={`answer-${index}`}>
-                <AudioPlayer
-                  src={item.src}
-                  isPlaying={index === activePlayer}
-                  onPlayButtonClick={() => onPlayButtonClick(index)}
-                />
+                {renderPlayer(item, index)}
                 <div className="game__answer">
                   <input
                     className="game__input visually-hidden"
@@ -49,10 +44,9 @@ class GenreQuestionScreen extends PureComponent {
 }
 
 GenreQuestionScreen.propTypes = {
-  activePlayer: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,
