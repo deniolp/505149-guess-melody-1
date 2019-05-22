@@ -12,10 +12,13 @@ import withTransformedProps from '../../hocs/with-transformed-props/with-transfo
 
 const GenreQuestionScreenWrapped = withSelectedAnswers(withActivePlayer(
     withTransformedProps((props) => {
-      return Object.assign({}, props, {
+      const newProps = Object.assign({}, props, {
         renderAnswer: props.renderPlayer,
       });
+      delete newProps.renderPlayer;
+      return newProps;
     })(GenreQuestionScreen)));
+const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
 class App extends PureComponent {
   render() {
@@ -46,7 +49,7 @@ class App extends PureComponent {
         onAnswer={(userAnswer) => onUserAnswer(question, step, userAnswer, errorCount, mistakes, length)}
       />;
 
-      case `artist`: return <ArtistQuestionScreen
+      case `artist`: return <ArtistQuestionScreenWrapped
         key={`Artist-question-screen-${step}`}
         question={question}
         gameTime={gameTime}
