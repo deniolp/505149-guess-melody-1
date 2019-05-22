@@ -4,18 +4,8 @@ import QuestionScreenHeader from '../question-screen-header/question-screen-head
 import AudioPlayer from '../audio-player/audio-player';
 
 class GenreQuestionScreen extends PureComponent {
-  constructor(props) {
-    super(props);
-    const {question} = this.props;
-    const {answers} = question;
-
-    this.state = {
-      selectedAnswers: new Array(answers.length).fill(false),
-    };
-  }
-
   render() {
-    const {activePlayer, question, gameTime, mistakes, onAnswer, onPlayButtonClick} = this.props;
+    const {activePlayer, question, gameTime, mistakes, onAnswer, onPlayButtonClick, onChange} = this.props;
     const {answers, genre} = question;
 
     return <section className="game game--genre">
@@ -27,7 +17,7 @@ class GenreQuestionScreen extends PureComponent {
         <h2 className="game__title">Выберите {genre} треки</h2>
         <form className="game__tracks" onSubmit={(evt) => {
           evt.preventDefault();
-          onAnswer(this.state.selectedAnswers);
+          onAnswer();
         }}>
           {
             answers.map((item, index) => {
@@ -44,14 +34,7 @@ class GenreQuestionScreen extends PureComponent {
                     name="answer"
                     value={`answer-${index}`}
                     id={`answer-${index}`}
-                    onChange={() => {
-                      const selectedAnswers = this.state.selectedAnswers.slice(0);
-                      selectedAnswers[index] = !selectedAnswers[index];
-
-                      this.setState({
-                        selectedAnswers
-                      });
-                    }}/>
+                    onChange={() => onChange(index)}/>
                   <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
                 </div>
               </div>;
@@ -67,6 +50,7 @@ class GenreQuestionScreen extends PureComponent {
 GenreQuestionScreen.propTypes = {
   activePlayer: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
