@@ -8,24 +8,31 @@ const withSelectedAnswers = (Component) => {
       this.state = {
         selectedAnswers: new Array(props.question.answers.length).fill(false),
       };
+
+      this._onAnswer = this._onAnswer.bind(this);
+      this._onChange = this._onChange.bind(this);
     }
 
     render() {
-      const {onAnswer} = this.props;
-
       return <Component
         {...this.props}
         selectedAnswers={this.state.selectedAnswers}
-        onChange={(index) => {
-          const selectedAnswers = this.state.selectedAnswers.slice(0);
-          selectedAnswers[index] = !selectedAnswers[index];
-
-          this.setState({
-            selectedAnswers
-          });
-        }}
-        onAnswer={() => onAnswer(this.state.selectedAnswers)}
+        onChange={this._onChange}
+        onAnswer={this._onAnswer}
       />;
+    }
+
+    _onChange(index) {
+      const selectedAnswers = this.state.selectedAnswers.slice(0);
+      selectedAnswers[index] = !selectedAnswers[index];
+
+      this.setState({
+        selectedAnswers
+      });
+    }
+
+    _onAnswer() {
+      this.props.onAnswer(this.state.selectedAnswers);
     }
   }
 
