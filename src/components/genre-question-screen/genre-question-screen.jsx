@@ -1,6 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+
 import QuestionScreenHeader from '../question-screen-header/question-screen-header';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import withSelectedAnswers from '../../hocs/with-selected-answers/with-selected-answers';
+import withTransformedProps from '../../hocs/with-transformed-props/with-transformed-props';
 
 class GenreQuestionScreen extends PureComponent {
   render() {
@@ -60,4 +64,11 @@ GenreQuestionScreen.propTypes = {
   selectedAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
 };
 
-export default GenreQuestionScreen;
+export default withSelectedAnswers(withActivePlayer(
+    withTransformedProps((props) => {
+      const newProps = Object.assign({}, props, {
+        renderAnswer: props.renderPlayer,
+      });
+      delete newProps.renderPlayer;
+      return newProps;
+    })(GenreQuestionScreen)));

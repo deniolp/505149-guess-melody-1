@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+
 import QuestionScreenHeader from '../question-screen-header/question-screen-header';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
 
 class ArtistQuestionScreen extends PureComponent {
   render() {
@@ -60,4 +62,4 @@ ArtistQuestionScreen.propTypes = {
 };
 
 
-export default ArtistQuestionScreen;
+export default withActivePlayer(ArtistQuestionScreen);

@@ -6,19 +6,6 @@ import WelcomeScreen from '../welcome-screen/welcome-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import {ActionCreator} from '../../reducer';
-import withActivePlayer from '../../hocs/with-active-player/with-active-player';
-import withSelectedAnswers from '../../hocs/with-selected-answers/with-selected-answers';
-import withTransformedProps from '../../hocs/with-transformed-props/with-transformed-props';
-
-const GenreQuestionScreenWrapped = withSelectedAnswers(withActivePlayer(
-    withTransformedProps((props) => {
-      const newProps = Object.assign({}, props, {
-        renderAnswer: props.renderPlayer,
-      });
-      delete newProps.renderPlayer;
-      return newProps;
-    })(GenreQuestionScreen)));
-const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
 class App extends PureComponent {
   render() {
@@ -41,7 +28,7 @@ class App extends PureComponent {
     const length = questions.length;
 
     switch (question.type) {
-      case `genre`: return <GenreQuestionScreenWrapped
+      case `genre`: return <GenreQuestionScreen
         key={`Genre-question-screen-${step}`}
         question={question}
         gameTime={gameTime}
@@ -49,7 +36,7 @@ class App extends PureComponent {
         onAnswer={(userAnswer) => onUserAnswer(question, step, userAnswer, errorCount, mistakes, length)}
       />;
 
-      case `artist`: return <ArtistQuestionScreenWrapped
+      case `artist`: return <ArtistQuestionScreen
         key={`Artist-question-screen-${step}`}
         question={question}
         gameTime={gameTime}
