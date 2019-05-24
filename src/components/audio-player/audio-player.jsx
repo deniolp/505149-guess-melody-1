@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
+import withAudio from '../../hocs/with-audio/with-audio';
+
 class AudioPlayer extends PureComponent {
   render() {
     const {isLoading, isPlaying, renderAudio, onPlayButtonClick} = this.props;
@@ -29,4 +31,4 @@ AudioPlayer.propTypes = {
   renderAudio: PropTypes.func.isRequired,
 };
 
-export default AudioPlayer;
+export default withAudio(AudioPlayer);
