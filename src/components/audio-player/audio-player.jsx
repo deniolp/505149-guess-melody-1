@@ -31,4 +31,6 @@ AudioPlayer.propTypes = {
   renderAudio: PropTypes.func.isRequired,
 };
 
+export {AudioPlayer};
+
 export default withAudio(AudioPlayer);

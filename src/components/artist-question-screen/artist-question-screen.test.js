@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
+import {ArtistQuestionScreen} from '../artist-question-screen/artist-question-screen';
 
 const mocks = {
   question: {

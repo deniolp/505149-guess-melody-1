@@ -2,7 +2,7 @@ import React from 'react';
 import {configure, shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import GenreQuestionScreen from './genre-question-screen';
+import {GenreQuestionScreen} from './genre-question-screen';
 import withSelectedAnswers from '../../hocs/with-selected-answers/with-selected-answers';
 
 configure({adapter: new Adapter()});

@@ -61,5 +61,6 @@ ArtistQuestionScreen.propTypes = {
   mistakes: PropTypes.number.isRequired,
 };
 
+export {ArtistQuestionScreen};
 
 export default withActivePlayer(ArtistQuestionScreen);

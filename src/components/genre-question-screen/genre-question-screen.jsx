@@ -64,6 +64,8 @@ GenreQuestionScreen.propTypes = {
   selectedAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
 };
 
+export {GenreQuestionScreen};
+
 export default withSelectedAnswers(withActivePlayer(
     withTransformedProps((props) => {
       const newProps = Object.assign({}, props, {
