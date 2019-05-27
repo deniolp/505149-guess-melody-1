@@ -4,19 +4,19 @@ export default [
     genre: `blues`,
     answers: [
       {
-        src: `https://upload.wikimedia.org/wikipedia/commons/f/f4/Irish_national_anthem%2C_performed_by_the_United_States_Navy_Band.wav`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/0/06/United_States_Navy_Band_-_Der_er_et_yndigt_land.ogg`,
         genre: `rock`,
       },
       {
-        src: `https://upload.wikimedia.org/wikipedia/commons/f/f4/Irish_national_anthem%2C_performed_by_the_United_States_Navy_Band.wav`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/0/06/United_States_Navy_Band_-_Der_er_et_yndigt_land.ogg`,
         genre: `jazz`,
       },
       {
-        src: `https://upload.wikimedia.org/wikipedia/commons/f/f4/Irish_national_anthem%2C_performed_by_the_United_States_Navy_Band.wav`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/0/06/United_States_Navy_Band_-_Der_er_et_yndigt_land.ogg`,
         genre: `blues`,
       },
       {
-        src: `https://upload.wikimedia.org/wikipedia/commons/f/f4/Irish_national_anthem%2C_performed_by_the_United_States_Navy_Band.wav`,
+        src: `https://upload.wikimedia.org/wikipedia/commons/0/06/United_States_Navy_Band_-_Der_er_et_yndigt_land.ogg`,
         genre: `blues`,
       }
     ]
@@ -47,7 +47,7 @@ export default [
     type: `artist`,
     song: {
       artist: `John Lennon`,
-      src: `https://upload.wikimedia.org/wikipedia/commons/f/f4/Irish_national_anthem%2C_performed_by_the_United_States_Navy_Band.wav`
+      src: `https://upload.wikimedia.org/wikipedia/commons/0/06/United_States_Navy_Band_-_Der_er_et_yndigt_land.ogg`
     },
     answers: [
       {

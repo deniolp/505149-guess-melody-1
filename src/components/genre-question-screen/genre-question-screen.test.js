@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
+import {GenreQuestionScreen} from '../genre-question-screen/genre-question-screen';
 
 const mock = {
   question: {
@@ -35,6 +35,9 @@ describe(`GenreQuestionScreen`, () => {
       gameTime={2}
       mistakes={2}
       onAnswer={jest.fn()}
+      onChange={jest.fn()}
+      renderAnswer={jest.fn()}
+      selectedAnswers={[false, false, false, false]}
     />, {
       createNodeMock: () => {
         return {};

@@ -1,7 +1,9 @@
 import React from 'react';
-import {configure, mount} from 'enzyme';
+import {configure, shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import GenreQuestionScreen from './genre-question-screen';
+
+import {GenreQuestionScreen} from './genre-question-screen';
+import withSelectedAnswers from '../../hocs/with-selected-answers/with-selected-answers';
 
 configure({adapter: new Adapter()});
 
@@ -34,7 +36,65 @@ let onAnswer;
 let form;
 let inputs;
 
-beforeEach(() => {
+it(`When user clicks submit, form is not sent`, () => {
+  const {question} = mocks;
+  onAnswer = jest.fn();
+
+  genreQuestion = shallow(
+      <GenreQuestionScreen
+        question={question}
+        gameTime={2}
+        mistakes={1}
+        onAnswer={onAnswer}
+        onChange={jest.fn()}
+        renderAnswer={jest.fn()}
+        selectedAnswers={[]}
+      />
+  );
+  form = genreQuestion.find(`form`);
+  inputs = genreQuestion.find(`input`);
+  window.HTMLMediaElement.prototype.pause = () => {};
+
+  form.simulate(`submit`, {preventDefault() {}});
+
+  expect(onAnswer).toHaveBeenCalledTimes(1);
+});
+
+it(`When component is rendered, inputs are synchronized with prop.selectedAnswers`, () => {
+  const GenreQuestionScreenWrapped = withSelectedAnswers(GenreQuestionScreen);
+
+  const {question} = mocks;
+  onAnswer = jest.fn();
+
+  genreQuestion = shallow(
+      <GenreQuestionScreenWrapped
+        question={question}
+        gameTime={2}
+        mistakes={1}
+        onAnswer={onAnswer}
+        onChange={jest.fn()}
+        renderAnswer={jest.fn()}
+      />
+  );
+  inputs = genreQuestion.dive().find(`input`);
+  window.HTMLMediaElement.prototype.pause = () => {};
+
+  expect(genreQuestion.prop(`selectedAnswers`)).toEqual([false, false, false, false]);
+
+  inputs.at(1).simulate(`change`, {
+    preventDefault() {}
+  });
+  inputs.at(3).simulate(`change`, {
+    preventDefault() {}
+  });
+  expect(genreQuestion.prop(`selectedAnswers`)).toEqual([false, true, false, true]);
+  inputs.at(3).simulate(`change`, {
+    preventDefault() {}
+  });
+  expect(genreQuestion.prop(`selectedAnswers`)).toEqual([false, true, false, false]);
+});
+
+it(`The user's answer passed to callback and it is synchronized with prop.selectedAnswers`, () => {
   const {question} = mocks;
   onAnswer = jest.fn();
 
@@ -44,42 +104,20 @@ beforeEach(() => {
         gameTime={2}
         mistakes={1}
         onAnswer={onAnswer}
+        onChange={jest.fn()}
+        renderAnswer={jest.fn()}
+        selectedAnswers={[false, false, true, false]}
       />
   );
   form = genreQuestion.find(`form`);
-  inputs = genreQuestion.find(`input`);
   window.HTMLMediaElement.prototype.pause = () => {};
-});
 
-it(`When user clicks submit, form is not sent`, () => {
-  form.simulate(`submit`, {preventDefault() {}});
-
-  expect(onAnswer).toHaveBeenCalledTimes(1);
-});
-
-it(`When component is rendered, state.selectedAnswers is synchronized with inputs`, () => {
-  expect(genreQuestion.state(`selectedAnswers`)).toEqual([false, false, false, false]);
-
-  inputs.at(1).simulate(`change`, {
-    preventDefault() {}
-  });
-  inputs.at(3).simulate(`change`, {
-    preventDefault() {}
-  });
-  expect(genreQuestion.state(`selectedAnswers`)).toEqual([false, true, false, true]);
-  inputs.at(3).simulate(`change`, {
-    preventDefault() {}
-  });
-  expect(genreQuestion.state(`selectedAnswers`)).toEqual([false, true, false, false]);
-});
-
-it(`The user's answer passed in callback and it is synchronized with state`, () => {
-  inputs.at(2).simulate(`change`, {
+  genreQuestion.find(`input`).at(2).simulate(`change`, {
     preventDefault() {}
   });
   form.simulate(`submit`, {preventDefault() {}});
 
-  expect(genreQuestion.state(`selectedAnswers`)).toEqual([false, false, true, false]);
+  expect(genreQuestion.find(`input`).map((it) => it.prop(`checked`)))
+    .toEqual([false, false, true, false]);
   expect(onAnswer).toHaveBeenCalledTimes(1);
-  expect(onAnswer).toHaveBeenNthCalledWith(1, [false, false, true, false]);
 });

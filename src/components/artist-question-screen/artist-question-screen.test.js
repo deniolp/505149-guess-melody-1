@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
+import {ArtistQuestionScreen} from '../artist-question-screen/artist-question-screen';
 
 const mocks = {
   question: {
@@ -34,6 +34,7 @@ describe(`ArtistQuestionScreen`, () => {
       gameTime={2}
       mistakes={2}
       onAnswer={jest.fn()}
+      renderPlayer={jest.fn()}
     />, {
       createNodeMock: () => {
         return {};
