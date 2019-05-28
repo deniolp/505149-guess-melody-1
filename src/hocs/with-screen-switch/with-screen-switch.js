@@ -27,14 +27,18 @@ const withScreenSwitch = (Component) => {
 
     _getScreen(question) {
       if (!question) {
-        const {step, questions, resetGame} = this.props;
+        const {step, questions, resetGame, mistakes, errorCount} = this.props;
 
-        if (step > questions.length - 1) {
+        if (step > questions.length - 1 && mistakes < errorCount) {
           return <WinScreen
             onReplayButtonClick={resetGame}
           />;
+        } else if (mistakes >= errorCount) {
+          return <GameOverScreen
+            onReplayButtonClick={resetGame}
+          />;
         } else {
-          const {errorCount, gameTime, onWelcomeScreenClick} = this.props;
+          const {gameTime, onWelcomeScreenClick} = this.props;
 
           return <WelcomeScreen
             gameTime={gameTime}
