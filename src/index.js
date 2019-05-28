@@ -7,12 +7,12 @@ import {compose} from 'recompose';
 
 import App from './components/app/app';
 import settings from './mocks/settings';
-import {reducer, loadQuestions} from './reducer';
+import {reducer, Operation} from './reducer';
 
 const store = createStore(reducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 const init = () => {
-  store.dispatch(loadQuestions());
+  store.dispatch(Operation.loadQuestions());
 
   ReactDom.render(<Provider store={store}>
     <App

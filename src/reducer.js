@@ -8,15 +8,17 @@ const isArtistAnswerCorrect = (userAnswer, question) => {
   return userAnswer.artist === question.song.artist;
 };
 
-const loadQuestions = () => (dispatch) => {
-  return fetch(`https://es31-server.appspot.com/guess-melody/questions`)
-    .then((response) => response.json())
-    .then((questions) => {
-      dispatch(ActionCreator.loadQuestions(questions));
-    });
-};
-
 const isGenreAnswerCorrect = (userAnswer, question) => userAnswer.every((it, i) => it === (question.answers[i].genre === question.genre));
+
+const Operation = {
+  loadQuestions: () => (dispatch) => {
+    return fetch(`https://es31-server.appspot.com/guess-melody/questions`)
+      .then((response) => response.json())
+      .then((questions) => {
+        dispatch(ActionCreator.loadQuestions(questions));
+      });
+  }
+};
 
 const ActionCreator = {
   incrementStep: () => ({
@@ -76,4 +78,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect, loadQuestions};
+export {reducer, ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect, Operation};
