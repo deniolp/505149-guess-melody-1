@@ -52,65 +52,6 @@ describe(`Action creators work correctly: `, () => {
       payload: 1,
     });
   });
-
-  it(`action creator resets state if user is answered incorrectly and there're no mistakes left (type artist)`, () => {
-    expect(ActionCreator.incrementMistake({
-      type: `artist`,
-      song: {
-        artist: `correct`,
-        src: ``,
-      },
-      answers: [
-        {
-          artist: `correct`,
-          picture: ``,
-        },
-        {
-          artist: `incorrect`,
-          picture: ``,
-        },
-        {
-          artist: `incorrect-2`,
-          picture: ``,
-        },
-      ]
-    },
-    4,
-    {
-      artist: `incorrect`,
-      picture: ``,
-    }, 0, 545, 2)).toEqual({
-      type: `RESET`,
-    });
-
-    expect(ActionCreator.incrementMistake({
-      type: `genre`,
-      genre: `jazz`,
-      answers: [
-        {
-          genre: `blues`,
-          src: ``,
-        },
-        {
-          genre: `blues`,
-          src: ``,
-        },
-        {
-          genre: `blues`,
-          src: ``,
-        },
-        {
-          genre: `blues`,
-          src: ``,
-        },
-      ]
-    },
-    4,
-    [true, true, true, true],
-    0, 565, 2)).toEqual({
-      type: `RESET`,
-    });
-  });
 });
 
 describe(`Business logic is correct: `, () => {
