@@ -32,6 +32,7 @@ const withScreenSwitch = (Component) => {
         if (step > questions.length - 1 && mistakes < errorCount) {
           return <WinScreen
             onReplayButtonClick={resetGame}
+            mistakes={mistakes}
           />;
         } else if (mistakes >= errorCount) {
           return <GameOverScreen
