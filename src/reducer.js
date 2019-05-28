@@ -1,5 +1,3 @@
-import questions from './mocks/questions';
-
 const initialState = {
   step: -1,
   mistakes: 0,
@@ -10,6 +8,13 @@ const isArtistAnswerCorrect = (userAnswer, question) => {
   return userAnswer.artist === question.song.artist;
 };
 
+const loadQuestions = () => (dispatch) => {
+  return fetch(`https://es31-server.appspot.com/guess-melody/questions`)
+    .then((response) => response.json())
+    .then((questions) => {
+      dispatch(ActionCreator.loadQuestions(questions));
+    });
+};
 
 const isGenreAnswerCorrect = (userAnswer, question) => userAnswer.every((it, i) => it === (question.answers[i].genre === question.genre));
 
@@ -37,7 +42,7 @@ const ActionCreator = {
     };
   },
 
-  loadQuestions: () => {
+  loadQuestions: (questions) => {
     return {
       type: `LOAD_QUESTIONS`,
       payload: questions,
@@ -71,4 +76,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect};
+export {reducer, ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect, loadQuestions};
