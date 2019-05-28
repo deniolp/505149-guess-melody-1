@@ -91,7 +91,7 @@ const withScreenSwitch = (Component) => {
 
 export {withScreenSwitch};
 
-const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: state.step,
   mistakes: state.mistakes,
 });
@@ -106,6 +106,4 @@ const mapDispatchToProps = (dispatch) => ({
   resetGame: () => dispatch(ActionCreator.resetGame()),
 });
 
-export default compose(
-    connect(mapSateToProps, mapDispatchToProps), withScreenSwitch
-);
+export default compose(connect(mapStateToProps, mapDispatchToProps), withScreenSwitch);

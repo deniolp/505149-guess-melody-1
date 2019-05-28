@@ -15,7 +15,7 @@ class App extends Component {
 App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   onClick: PropTypes.func,
-  renderScreen: PropTypes.func,
+  renderScreen: PropTypes.func.isRequired,
   questions: PropTypes.array.isRequired,
   step: PropTypes.number.isRequired,
 };
