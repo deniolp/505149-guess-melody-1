@@ -16,7 +16,7 @@ const ActionCreator = {
     payload: 1,
   }),
 
-  incrementMistake: (question, questionsLength, userAnswer, errorCount, mistakes, step) => {
+  incrementMistake: (question, userAnswer) => {
     let isAnswerCorrect = false;
 
     switch (question.type) {
@@ -28,15 +28,15 @@ const ActionCreator = {
         break;
     }
 
-    if (!isAnswerCorrect && mistakes + 1 >= errorCount || step >= questionsLength - 1) {
-      return {
-        type: `RESET`,
-      };
-    }
-
     return {
       type: `INCREMENT_MISTAKES`,
       payload: isAnswerCorrect ? 0 : 1,
+    };
+  },
+
+  resetGame: () => {
+    return {
+      type: `RESET`,
     };
   }
 };

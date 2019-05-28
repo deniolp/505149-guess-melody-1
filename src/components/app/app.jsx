@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
+import GameOverScreen from '../game-over-screen/game-over-screen';
+import WinScreen from '../win-screen/win-screen';
 import {ActionCreator} from '../../reducer';
 
 class App extends PureComponent {
@@ -16,16 +18,30 @@ class App extends PureComponent {
 
   _getScreen(question) {
     if (!question) {
-      const {errorCount, gameTime, onWelcomeScreenClick} = this.props;
-      return <WelcomeScreen
-        gameTime={gameTime}
-        errorCount={errorCount}
-        onStartButtonClick={onWelcomeScreenClick}
-      />;
+      const {step, questions, resetGame} = this.props;
+
+      if (step > questions.length - 1) {
+        return <WinScreen
+          onReplayButtonClick={resetGame}
+        />;
+      } else {
+        const {errorCount, gameTime, onWelcomeScreenClick} = this.props;
+
+        return <WelcomeScreen
+          gameTime={gameTime}
+          errorCount={errorCount}
+          onStartButtonClick={onWelcomeScreenClick}
+        />;
+      }
     }
 
-    const {onUserAnswer, mistakes, errorCount, step, gameTime, questions} = this.props;
-    const length = questions.length;
+    const {onUserAnswer, mistakes, errorCount, step, gameTime, resetGame} = this.props;
+
+    if (mistakes >= errorCount) {
+      return <GameOverScreen
+        onReplayButtonClick={resetGame}
+      />;
+    }
 
     switch (question.type) {
       case `genre`: return <GenreQuestionScreen
@@ -33,7 +49,7 @@ class App extends PureComponent {
         question={question}
         gameTime={gameTime}
         mistakes={mistakes}
-        onAnswer={(userAnswer) => onUserAnswer(question, step, userAnswer, errorCount, mistakes, length)}
+        onAnswer={(userAnswer) => onUserAnswer(question, userAnswer)}
       />;
 
       case `artist`: return <ArtistQuestionScreen
@@ -41,7 +57,7 @@ class App extends PureComponent {
         question={question}
         gameTime={gameTime}
         mistakes={mistakes}
-        onAnswer={(userAnswer) => onUserAnswer(question, step, userAnswer, errorCount, mistakes, length)}
+        onAnswer={(userAnswer) => onUserAnswer(question, userAnswer)}
       />;
     }
 
@@ -58,6 +74,7 @@ App.propTypes = {
   mistakes: PropTypes.number.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
   onWelcomeScreenClick: PropTypes.func.isRequired,
+  resetGame: PropTypes.func.isRequired,
 };
 
 const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -68,10 +85,11 @@ const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 const mapDispatchToProps = (dispatch) => ({
   onWelcomeScreenClick: () => dispatch(ActionCreator.incrementStep()),
 
-  onUserAnswer: (question, step, userAnswer, errorCount, mistakes, length) => {
+  onUserAnswer: (question, userAnswer) => {
     dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistake(question, length, userAnswer, errorCount, mistakes, step));
-  }
+    dispatch(ActionCreator.incrementMistake(question, userAnswer));
+  },
+  resetGame: () => dispatch(ActionCreator.resetGame()),
 });
 
 export {App};
