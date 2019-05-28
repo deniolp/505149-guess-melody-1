@@ -22,7 +22,7 @@ App.propTypes = {
 
 const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: state.step,
-  mistakes: state.mistakes,
+  questions: state.questions,
 });
 
 export {App};
