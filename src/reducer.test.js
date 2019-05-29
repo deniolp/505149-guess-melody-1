@@ -1,10 +1,14 @@
-import {reducer, ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect} from './reducer';
+import MockAdapter from 'axios-mock-adapter';
+
+import {reducer, ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect, Operation} from './reducer';
+import api from './api';
 
 describe(`Reducer works correctly: `, () => {
   it(`if there is no parameters, should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       step: -1,
       mistakes: 0,
+      questions: [],
     });
   });
 
@@ -41,7 +45,25 @@ describe(`Reducer works correctly: `, () => {
     })).toEqual({
       step: -1,
       mistakes: 0,
+      questions: [],
     });
+  });
+
+  it(`should make correct API call to /questions`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const questionLoader = Operation.loadQuestions();
+
+    apiMock.onGet(`/questions`).reply(200, [{a: true}]);
+
+    return questionLoader(dispatch)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: `LOAD_QUESTIONS`,
+          payload: [{a: true}],
+        });
+      });
   });
 });
 
