@@ -1,3 +1,5 @@
+import api from './api';
+
 const initialState = {
   step: -1,
   mistakes: 0,
@@ -12,10 +14,9 @@ const isGenreAnswerCorrect = (userAnswer, question) => userAnswer.every((it, i) 
 
 const Operation = {
   loadQuestions: () => (dispatch) => {
-    return fetch(`https://es31-server.appspot.com/guess-melody/questions`)
-      .then((response) => response.json())
-      .then((questions) => {
-        dispatch(ActionCreator.loadQuestions(questions));
+    return api.get(`/questions`)
+      .then((response) => {
+        dispatch(ActionCreator.loadQuestions(response.data));
       });
   }
 };
