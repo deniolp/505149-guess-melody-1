@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import withScreenSwitch from '../../hocs/with-screen-switch/with-screen-switch';
+import {getStep} from '../../reducer/game/selectors';
+import {getQuestions} from '../../reducer/data/selectors';
 
 class App extends Component {
   render() {
@@ -21,8 +23,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  step: state.game.step,
-  questions: state.data.questions,
+  step: getStep(state),
+  questions: getQuestions(state),
 });
 
 export {App};
