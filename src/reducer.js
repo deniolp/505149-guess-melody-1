@@ -1,5 +1,3 @@
-import api from './api';
-
 const initialState = {
   step: -1,
   mistakes: 0,
@@ -13,7 +11,7 @@ const isArtistAnswerCorrect = (userAnswer, question) => {
 const isGenreAnswerCorrect = (userAnswer, question) => userAnswer.every((it, i) => it === (question.answers[i].genre === question.genre));
 
 const Operation = {
-  loadQuestions: () => (dispatch) => {
+  loadQuestions: () => (dispatch, _getState, api) => {
     return api.get(`/questions`)
       .then((response) => {
         dispatch(ActionCreator.loadQuestions(response.data));

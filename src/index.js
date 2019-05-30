@@ -6,12 +6,14 @@ import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 
 import App from './components/app/app';
+import {createAPI} from './api';
 import settings from './mocks/settings';
 import {reducer, Operation} from './reducer';
 
-const store = createStore(reducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
-
 const init = () => {
+  const api = createAPI((...arg) => store.dispatch(...arg));
+  const store = createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument(api)), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+
   store.dispatch(Operation.loadQuestions());
 
   ReactDom.render(<Provider store={store}>
