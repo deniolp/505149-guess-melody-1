@@ -8,7 +8,8 @@ import {compose} from 'recompose';
 import App from './components/app/app';
 import {createAPI} from './api';
 import settings from './mocks/settings';
-import {reducer, Operation} from './reducer';
+import reducer from './reducer/index';
+import {Operation} from './reducer/data/data';
 
 const init = () => {
   const api = createAPI((...arg) => store.dispatch(...arg));

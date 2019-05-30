@@ -20,11 +20,11 @@ App.propTypes = {
   step: PropTypes.number.isRequired,
 };
 
-const mapSateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  step: state.step,
-  questions: state.questions,
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  step: state.game.step,
+  questions: state.data.questions,
 });
 
 export {App};
 
-export default withScreenSwitch(connect(mapSateToProps)(App));
+export default withScreenSwitch(connect(mapStateToProps)(App));

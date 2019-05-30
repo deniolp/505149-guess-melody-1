@@ -1,7 +1,6 @@
 const initialState = {
   step: -1,
   mistakes: 0,
-  questions: [],
 };
 
 const isArtistAnswerCorrect = (userAnswer, question) => {
@@ -9,15 +8,6 @@ const isArtistAnswerCorrect = (userAnswer, question) => {
 };
 
 const isGenreAnswerCorrect = (userAnswer, question) => userAnswer.every((it, i) => it === (question.answers[i].genre === question.genre));
-
-const Operation = {
-  loadQuestions: () => (dispatch, _getState, api) => {
-    return api.get(`/questions`)
-      .then((response) => {
-        dispatch(ActionCreator.loadQuestions(response.data));
-      });
-  }
-};
 
 const ActionCreator = {
   incrementStep: () => ({
@@ -43,13 +33,6 @@ const ActionCreator = {
     };
   },
 
-  loadQuestions: (questions) => {
-    return {
-      type: `LOAD_QUESTIONS`,
-      payload: questions,
-    };
-  },
-
   resetGame: () => {
     return {
       type: `RESET`,
@@ -67,14 +50,10 @@ const reducer = (state = initialState, action) => {
       mistakes: state.mistakes + action.payload,
     });
 
-    case `LOAD_QUESTIONS`: return Object.assign({}, state, {
-      questions: action.payload,
-    });
-
     case `RESET`: return Object.assign({}, initialState);
   }
 
   return state;
 };
 
-export {reducer, ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect, Operation};
+export {reducer, ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect};

@@ -8,7 +8,7 @@ import GenreQuestionScreen from '../../components/genre-question-screen/genre-qu
 import ArtistQuestionScreen from '../../components/artist-question-screen/artist-question-screen';
 import GameOverScreen from '../../components/game-over-screen/game-over-screen';
 import WinScreen from '../../components/win-screen/win-screen';
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from '../../reducer/game/game';
 
 const withScreenSwitch = (Component) => {
   class WithScreenSwitch extends PureComponent {
@@ -97,9 +97,9 @@ const withScreenSwitch = (Component) => {
 export {withScreenSwitch};
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  step: state.step,
-  mistakes: state.mistakes,
-  questions: state.questions,
+  step: state.game.step,
+  mistakes: state.game.mistakes,
+  questions: state.data.questions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
