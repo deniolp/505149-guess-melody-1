@@ -40,9 +40,9 @@ const withSelectedAnswers = (Component) => {
     question: PropTypes.shape({
       answers: PropTypes.arrayOf(PropTypes.shape({
         src: PropTypes.string.isRequired,
-        genre: PropTypes.oneOf([`blues`, `rock`, `jazz`]).isRequired,
+        genre: PropTypes.string.isRequired,
       })).isRequired,
-      genre: PropTypes.oneOf([`blues`, `rock`, `jazz`]).isRequired,
+      genre: PropTypes.string.isRequired,
       type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
     }).isRequired,
     onAnswer: PropTypes.func.isRequired,
