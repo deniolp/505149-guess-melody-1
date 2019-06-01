@@ -22,7 +22,7 @@ App.propTypes = {
   step: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state) => ({
   step: getStep(state),
   questions: getQuestions(state),
 });
