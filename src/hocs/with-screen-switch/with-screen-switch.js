@@ -37,6 +37,7 @@ const withScreenSwitch = (Component) => {
           if (this.props.isAuthorizationRequired) {
             return <AuthorizationScreen
               onReplayButtonClick={resetGame}
+              mistakes={mistakes}
             />;
           } else {
             return <WinScreen

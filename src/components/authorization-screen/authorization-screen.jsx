@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {Operation} from '../../reducer/user/user';
+import {getAuthError} from '../../reducer/user/selectors';
 
 class AuthorizationScreen extends PureComponent {
   constructor(props) {
@@ -19,11 +20,12 @@ class AuthorizationScreen extends PureComponent {
   }
 
   render() {
-    const {onReplayButtonClick} = this.props;
+    const {onReplayButtonClick, mistakes, authError} = this.props;
+
     return <section className="login">
       <div className="login__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/></div>
       <h2 className="login__title">Вы настоящий меломан!</h2>
-      <p className="login__total">За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки</p>
+      <p className="login__total">Вы выиграли, совершив {mistakes} ошибки(-у, -ок)</p>
       <p className="login__text">Хотите сравнить свой результат с предыдущими попытками? Представтесь!</p>
       <form className="login__form" action="" onSubmit={this._handleSubmit}>
         <p className="login__field">
@@ -33,7 +35,7 @@ class AuthorizationScreen extends PureComponent {
         <p className="login__field">
           <label className="login__label" htmlFor="password">Пароль</label>
           <input className="login__input" type="text" name="password" id="password" onChange={this._handlePasswordInput} required/>
-          <span className="login__error">Неверный пароль</span>
+          {this._getErrorElement(authError)}
         </p>
         <button className="login__button button" type="submit">Войти</button>
       </form>
@@ -60,12 +62,24 @@ class AuthorizationScreen extends PureComponent {
       password: evt.target.value,
     });
   }
+
+  _getErrorElement(authError) {
+    return authError ? <span className="login__error" style={{
+      display: `block`,
+    }}>{authError}</span> : ``;
+  }
 }
 
 AuthorizationScreen.propTypes = {
   submitForm: PropTypes.func.isRequired,
   onReplayButtonClick: PropTypes.func.isRequired,
+  mistakes: PropTypes.number.isRequired,
+  authError: PropTypes.string,
 };
+
+const mapStateToProps = (state) => ({
+  authError: getAuthError(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   submitForm: (email, password) => dispatch(Operation.authorizeUser(email, password)),
@@ -73,4 +87,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {AuthorizationScreen};
 
-export default connect(null, mapDispatchToProps)(AuthorizationScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationScreen);
