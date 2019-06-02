@@ -4,7 +4,7 @@ import NameSpace from '../name-spaces';
 const NAME_SPACE = NameSpace.DATA;
 
 export const getQuestions = (state) => {
-  return state[NAME_SPACE].questions;
+  return state[NAME_SPACE].questions.slice(0, 2);
 };
 
 export const getGenreQuestions = createSelector(
