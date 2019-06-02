@@ -12,6 +12,7 @@ import WinScreen from '../../components/win-screen/win-screen';
 import {ActionCreator} from '../../reducer/game/game';
 import {getStep, getMistakes} from '../../reducer/game/selectors';
 import {getQuestions} from '../../reducer/data/selectors';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 const withScreenSwitch = (Component) => {
   class WithScreenSwitch extends PureComponent {
@@ -107,7 +108,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: getStep(state),
   questions: getQuestions(state),
   mistakes: getMistakes(state),
-  isAuthorizationRequired: state.isAuthorizationRequired,
+  isAuthorizationRequired: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ActionCreator} from './reducer/game/game';
+import {ActionCreator} from './reducer/user/user';
 
 export const createAPI = ((dispatch) => {
   const api = axios.create({
@@ -11,7 +11,7 @@ export const createAPI = ((dispatch) => {
   const onSuccess = (response) => response;
   const onFail = (error) => {
     if (error.response.status === 403) {
-      dispatch(ActionCreator.resetGame());
+      dispatch(ActionCreator.requireAuthorization(true));
     }
     return error;
   };
