@@ -30,17 +30,20 @@ const withScreenSwitch = (Component) => {
     }
 
     _getScreen(question) {
-      if (this.props.isAuthorizationRequired) {
-        return <AuthorizationScreen />;
-      }
       if (!question) {
         const {step, questions, resetGame, mistakes, errorCount} = this.props;
 
         if (step > questions.length - 1 && mistakes < errorCount) {
-          return <WinScreen
-            onReplayButtonClick={resetGame}
-            mistakes={mistakes}
-          />;
+          if (this.props.isAuthorizationRequired) {
+            return <AuthorizationScreen
+              onReplayButtonClick={resetGame}
+            />;
+          } else {
+            return <WinScreen
+              onReplayButtonClick={resetGame}
+              mistakes={mistakes}
+            />;
+          }
         } else if (mistakes >= errorCount) {
           return <GameOverScreen
             onReplayButtonClick={resetGame}
