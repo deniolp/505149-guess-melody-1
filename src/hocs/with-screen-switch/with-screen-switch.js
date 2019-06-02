@@ -6,11 +6,13 @@ import {compose} from 'recompose';
 import WelcomeScreen from '../../components/welcome-screen/welcome-screen';
 import GenreQuestionScreen from '../../components/genre-question-screen/genre-question-screen';
 import ArtistQuestionScreen from '../../components/artist-question-screen/artist-question-screen';
+import AuthorizationScreen from '../../components/authorization-screen/authorization-screen';
 import GameOverScreen from '../../components/game-over-screen/game-over-screen';
 import WinScreen from '../../components/win-screen/win-screen';
 import {ActionCreator} from '../../reducer/game/game';
 import {getStep, getMistakes} from '../../reducer/game/selectors';
 import {getQuestions} from '../../reducer/data/selectors';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 const withScreenSwitch = (Component) => {
   class WithScreenSwitch extends PureComponent {
@@ -32,10 +34,17 @@ const withScreenSwitch = (Component) => {
         const {step, questions, resetGame, mistakes, errorCount} = this.props;
 
         if (step > questions.length - 1 && mistakes < errorCount) {
-          return <WinScreen
-            onReplayButtonClick={resetGame}
-            mistakes={mistakes}
-          />;
+          if (this.props.isAuthorizationRequired) {
+            return <AuthorizationScreen
+              onReplayButtonClick={resetGame}
+              mistakes={mistakes}
+            />;
+          } else {
+            return <WinScreen
+              onReplayButtonClick={resetGame}
+              mistakes={mistakes}
+            />;
+          }
         } else if (mistakes >= errorCount) {
           return <GameOverScreen
             onReplayButtonClick={resetGame}
@@ -83,6 +92,7 @@ const withScreenSwitch = (Component) => {
 
   WithScreenSwitch.propTypes = {
     gameTime: PropTypes.number.isRequired,
+    isAuthorizationRequired: PropTypes.bool.isRequired,
     errorCount: PropTypes.number.isRequired,
     onClick: PropTypes.func,
     questions: PropTypes.array.isRequired,
@@ -102,6 +112,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: getStep(state),
   questions: getQuestions(state),
   mistakes: getMistakes(state),
+  isAuthorizationRequired: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
