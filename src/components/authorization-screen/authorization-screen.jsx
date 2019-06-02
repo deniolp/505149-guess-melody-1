@@ -4,23 +4,17 @@ import {connect} from 'react-redux';
 
 import {Operation} from '../../reducer/user/user';
 import {getAuthError} from '../../reducer/user/selectors';
+import withFormData from '../../hocs/with-form-data/with-form-data';
 
 class AuthorizationScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      name: ``,
-      password: ``,
-    };
-
     this._handleSubmit = this._handleSubmit.bind(this);
-    this._handleNameInput = this._handleNameInput.bind(this);
-    this._handlePasswordInput = this._handlePasswordInput.bind(this);
   }
 
   render() {
-    const {onReplayButtonClick, mistakes, authError} = this.props;
+    const {onReplayButtonClick, mistakes, authError, onChangeNameInput, onChangePasswordInput} = this.props;
 
     return <section className="login">
       <div className="login__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/></div>
@@ -30,11 +24,11 @@ class AuthorizationScreen extends PureComponent {
       <form className="login__form" action="" onSubmit={this._handleSubmit}>
         <p className="login__field">
           <label className="login__label" htmlFor="name">Логин</label>
-          <input className="login__input" type="text" name="name" id="name" onChange={this._handleNameInput} required/>
+          <input className="login__input" type="text" name="name" id="name" onChange={onChangeNameInput} required/>
         </p>
         <p className="login__field">
           <label className="login__label" htmlFor="password">Пароль</label>
-          <input className="login__input" type="text" name="password" id="password" onChange={this._handlePasswordInput} required/>
+          <input className="login__input" type="text" name="password" id="password" onChange={onChangePasswordInput} required/>
           {this._getErrorElement(authError)}
         </p>
         <button className="login__button button" type="submit">Войти</button>
@@ -45,22 +39,9 @@ class AuthorizationScreen extends PureComponent {
 
   _handleSubmit(evt) {
     evt.preventDefault();
-    const name = this.state.name;
-    const password = this.state.password;
+    const {name = ``, password = ``} = this.props.formData;
 
     this.props.submitForm(name, password);
-  }
-
-  _handleNameInput(evt) {
-    this.setState({
-      name: evt.target.value,
-    });
-  }
-
-  _handlePasswordInput(evt) {
-    this.setState({
-      password: evt.target.value,
-    });
   }
 
   _getErrorElement(authError) {
@@ -72,9 +53,12 @@ class AuthorizationScreen extends PureComponent {
 
 AuthorizationScreen.propTypes = {
   submitForm: PropTypes.func.isRequired,
+  onChangePasswordInput: PropTypes.func,
+  onChangeNameInput: PropTypes.func,
   onReplayButtonClick: PropTypes.func.isRequired,
   mistakes: PropTypes.number.isRequired,
   authError: PropTypes.string,
+  formData: PropTypes.objectOf(PropTypes.string),
 };
 
 const mapStateToProps = (state) => ({
@@ -87,4 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {AuthorizationScreen};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationScreen);
+export default withFormData(connect(mapStateToProps, mapDispatchToProps)(AuthorizationScreen));
