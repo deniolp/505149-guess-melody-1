@@ -12,7 +12,7 @@ import reducer from './reducer/main-reducer';
 import {Operation} from './reducer/data/data';
 
 const init = () => {
-  const api = createAPI((...arg) => store.dispatch(...arg));
+  const api = createAPI(() => history.pushState(null, null, `/result`));
   const store = createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument(api)), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
   store.dispatch(Operation.loadQuestions());
