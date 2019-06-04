@@ -13,7 +13,7 @@ import {Operation} from './reducer/data/data';
 
 const init = () => {
   const api = createAPI(() => history.pushState(null, null, `/result`));
-  const store = createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument(api)), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+  const store = createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument(api)), window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (a) => a));
 
   store.dispatch(Operation.loadQuestions());
 
