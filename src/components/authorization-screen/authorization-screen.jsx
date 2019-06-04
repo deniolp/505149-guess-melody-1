@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link, withRouter} from "react-router-dom";
 
 import {Operation} from '../../reducer/user/user';
-import {getAuthError} from '../../reducer/user/selectors';
+import {getAuthError, getUser} from '../../reducer/user/selectors';
 import withFormData from '../../hocs/with-form-data/with-form-data';
 
 class AuthorizationScreen extends PureComponent {
@@ -11,6 +12,12 @@ class AuthorizationScreen extends PureComponent {
     super(props);
 
     this._handleSubmit = this._handleSubmit.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
+      const {history} = this.props;
+      history.push(`/win`);
+    }
   }
 
   render() {
@@ -33,7 +40,11 @@ class AuthorizationScreen extends PureComponent {
         </p>
         <button className="login__button button" type="submit">Войти</button>
       </form>
-      <button className="replay" type="button" onClick={onReplayButtonClick}>Сыграть ещё раз</button>
+      <Link
+        to="/"
+        className="replay"
+        onClick={onReplayButtonClick}
+      >Попробовать ещё раз</Link>
     </section>;
   }
 
@@ -58,11 +69,14 @@ AuthorizationScreen.propTypes = {
   onReplayButtonClick: PropTypes.func.isRequired,
   mistakes: PropTypes.number.isRequired,
   authError: PropTypes.string,
+  user: PropTypes.object,
   formData: PropTypes.objectOf(PropTypes.string),
+  history: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   authError: getAuthError(state),
+  user: getUser(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -71,4 +85,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {AuthorizationScreen};
 
-export default withFormData(connect(mapStateToProps, mapDispatchToProps)(AuthorizationScreen));
+export default withFormData(connect(mapStateToProps, mapDispatchToProps)(withRouter(AuthorizationScreen)));
