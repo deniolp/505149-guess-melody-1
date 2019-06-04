@@ -26,12 +26,12 @@ exports[`WelcomeScreen renders correctly 1`] = `
     0
      ошибки(-у, -ок)
   </p>
-  <button
+  <a
     className="replay"
-    onClick={[MockFunction]}
-    type="button"
+    href="/"
+    onClick={[Function]}
   >
-    Сыграть ещё раз
-  </button>
+    Попробовать ещё раз
+  </a>
 </section>
 `;
