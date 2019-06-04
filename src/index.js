@@ -7,9 +7,13 @@ import {compose} from 'recompose';
 
 import App from './components/app/app';
 import {createAPI} from './api';
-import settings from './mocks/settings';
 import reducer from './reducer/main-reducer';
 import {Operation} from './reducer/data/data';
+
+const settings = {
+  GAMETIME: 5,
+  ERRORCOUNT: 3,
+};
 
 const init = () => {
   const api = createAPI(() => history.pushState(null, null, `/result`));

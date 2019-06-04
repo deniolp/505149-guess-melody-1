@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {BrowserRouter, Link, withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 import {Operation} from '../../reducer/user/user';
 import {getAuthError, getUser} from '../../reducer/user/selectors';
@@ -40,13 +40,11 @@ class AuthorizationScreen extends PureComponent {
         </p>
         <button className="login__button button" type="submit">Войти</button>
       </form>
-      <BrowserRouter>
-        <Link
-          to="/"
-          className="replay"
-          onClick={onReplayButtonClick}
-        >Попробовать ещё раз</Link>
-      </BrowserRouter>
+      <Link
+        to="/"
+        className="replay"
+        onClick={onReplayButtonClick}
+      >Попробовать ещё раз</Link>
     </section>;
   }
 
