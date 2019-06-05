@@ -1,7 +1,6 @@
 import axios from 'axios';
-import {ActionCreator} from './reducer/user/user';
 
-export const createAPI = ((dispatch) => {
+export const createAPI = ((onLoginFail) => {
   const api = axios.create({
     baseURL: `https://es31-server.appspot.com/guess-melody`,
     timeout: 5000,
@@ -10,10 +9,12 @@ export const createAPI = ((dispatch) => {
 
   const onSuccess = (response) => response;
   const onFail = (error) => {
-    if (error.response.status === 400) {
-      dispatch(ActionCreator.authError(error.response.data.error));
+    if (error.response.status) {
+      if (error.response.status === 403) {
+        onLoginFail();
+      }
     }
-    return error;
+    throw error;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

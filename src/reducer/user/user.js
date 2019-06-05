@@ -14,7 +14,14 @@ const Operation = {
           dispatch(ActionCreator.authError(null));
         }
       })
-      .catch((error) => dispatch(ActionCreator.authError(error.response.data.error)));
+      .catch((error) => {
+        global.console.log(error);
+        if (error.response.status) {
+          if (error.response.status === 400) {
+            dispatch(ActionCreator.authError(error.response.data.error));
+          }
+        }
+      });
   }
 };
 

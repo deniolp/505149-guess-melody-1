@@ -1,13 +1,13 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 import {Operation} from '../../reducer/user/user';
 import {getAuthError, getUser} from '../../reducer/user/selectors';
 import withFormData from '../../hocs/with-form-data/with-form-data';
 
-class AuthorizationScreen extends PureComponent {
+class SignIn extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -16,18 +16,16 @@ class AuthorizationScreen extends PureComponent {
   componentDidUpdate(prevProps) {
     if (this.props.user !== prevProps.user) {
       const {history} = this.props;
-      history.push(`/win`);
+      history.push(`/`);
     }
   }
 
   render() {
-    const {onReplayButtonClick, mistakes, authError, onChangeNameInput, onChangePasswordInput} = this.props;
+    const {authError, onChangeNameInput, onChangePasswordInput} = this.props;
 
     return <section className="login">
       <div className="login__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/></div>
-      <h2 className="login__title">Вы настоящий меломан!</h2>
-      <p className="login__total">Вы выиграли, совершив {mistakes} ошибки(-у, -ок)</p>
-      <p className="login__text">Хотите сравнить свой результат с предыдущими попытками? Представтесь!</p>
+      <p className="login__text">Представтесь!</p>
       <form className="login__form" action="" onSubmit={this._handleSubmit}>
         <p className="login__field">
           <label className="login__label" htmlFor="name">Логин</label>
@@ -40,11 +38,6 @@ class AuthorizationScreen extends PureComponent {
         </p>
         <button className="login__button button" type="submit">Войти</button>
       </form>
-      <Link
-        to="/"
-        className="replay"
-        onClick={onReplayButtonClick}
-      >Попробовать ещё раз</Link>
     </section>;
   }
 
@@ -62,16 +55,15 @@ class AuthorizationScreen extends PureComponent {
   }
 }
 
-AuthorizationScreen.propTypes = {
+
+SignIn.propTypes = {
   submitForm: PropTypes.func.isRequired,
   onChangePasswordInput: PropTypes.func,
   onChangeNameInput: PropTypes.func,
-  onReplayButtonClick: PropTypes.func.isRequired,
-  mistakes: PropTypes.number.isRequired,
   authError: PropTypes.string,
-  user: PropTypes.object,
   formData: PropTypes.objectOf(PropTypes.string),
   history: PropTypes.object,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -83,6 +75,6 @@ const mapDispatchToProps = (dispatch) => ({
   submitForm: (email, password) => dispatch(Operation.authorizeUser(email, password)),
 });
 
-export {AuthorizationScreen};
+export {SignIn};
 
-export default withFormData(connect(mapStateToProps, mapDispatchToProps)(withRouter(AuthorizationScreen)));
+export default withFormData(connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn)));
