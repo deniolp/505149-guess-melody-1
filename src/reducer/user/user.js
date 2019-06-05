@@ -15,8 +15,11 @@ const Operation = {
         }
       })
       .catch((error) => {
-        if (error.response.status === 400) {
-          dispatch(ActionCreator.authError(error.response.data.error));
+        global.console.log(error);
+        if (error.response.status) {
+          if (error.response.status === 400) {
+            dispatch(ActionCreator.authError(error.response.data.error));
+          }
         }
       });
   }

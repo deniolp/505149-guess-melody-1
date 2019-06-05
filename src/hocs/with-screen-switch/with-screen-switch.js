@@ -8,12 +8,14 @@ import WelcomeScreen from '../../components/welcome-screen/welcome-screen';
 import GenreQuestionScreen from '../../components/genre-question-screen/genre-question-screen';
 import ArtistQuestionScreen from '../../components/artist-question-screen/artist-question-screen';
 import AuthorizationScreen from '../../components/authorization-screen/authorization-screen';
+import SignIn from '../../components/sign-in/sign-in';
 import GameOverScreen from '../../components/game-over-screen/game-over-screen';
 import WinScreen from '../../components/win-screen/win-screen';
 import {ActionCreator} from '../../reducer/game/game';
 import {getStep, getMistakes} from '../../reducer/game/selectors';
 import {getQuestions} from '../../reducer/data/selectors';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import withPrivateRoute from '../with-private-routes/with-private-routes';
 
 const withScreenSwitch = (Component) => {
   class WithScreenSwitch extends PureComponent {
@@ -25,6 +27,12 @@ const withScreenSwitch = (Component) => {
 
     render() {
       const {resetGame, mistakes} = this.props;
+      const WinScreenForWrapper = () =>
+        <WinScreen
+          onReplayButtonClick={resetGame}
+          mistakes={mistakes}
+        />;
+
       return <BrowserRouter basename="/505149-guess-melody-1/11/">
         <Switch>
           <Route path="/" exact render={() => <Component
@@ -32,10 +40,7 @@ const withScreenSwitch = (Component) => {
             renderScreen={this._getScreen}
           />} />
 
-          <Route path="/win" render={() => <WinScreen
-            onReplayButtonClick={resetGame}
-            mistakes={mistakes}
-          />} />
+          <Route path="/win" component={withPrivateRoute(WinScreenForWrapper)} />
 
           <Route path="/lose" render={() => <GameOverScreen
             onReplayButtonClick={resetGame}
@@ -45,6 +50,8 @@ const withScreenSwitch = (Component) => {
             onReplayButtonClick={resetGame}
             mistakes={mistakes}
           />} />
+
+          <Route path="/sign-in" component={SignIn} />
         </Switch>
       </BrowserRouter>;
     }
