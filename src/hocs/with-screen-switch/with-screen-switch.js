@@ -25,8 +25,7 @@ const withScreenSwitch = (Component) => {
 
     render() {
       const {resetGame, mistakes} = this.props;
-      // eslint-disable-next-line no-undef
-      return <BrowserRouter basename={process.env.PUBLIC_URL}>
+      return <BrowserRouter basename="/505149-guess-melody-1/11/">
         <Switch>
           <Route path="/" exact render={() => <Component
             {...this.props}
