@@ -53,7 +53,7 @@ const withScreenSwitch = (Component) => {
           mistakes={mistakes}
         />;
 
-      return <BrowserRouter>
+      return <BrowserRouter basename="/505149-guess-melody-1/12/">
         <Switch>
           <Route path="/" exact render={() => <Component
             {...this.props}
