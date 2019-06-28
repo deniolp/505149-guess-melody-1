@@ -25,7 +25,7 @@ beforeEach(() => {
         renderAudio={jest.fn()}
       />);
   playButton = audioPlayer.find(`.track__button`);
-  window.HTMLMediaElement.prototype.pause = () => {};
+  (window as any).HTMLMediaElement.prototype.pause = () => {};
 });
 
 it(`Click on button makes isPlaying changed`, () => {

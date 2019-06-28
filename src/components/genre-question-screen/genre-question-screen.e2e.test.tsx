@@ -54,7 +54,7 @@ it(`When user clicks submit, form is not sent`, () => {
   );
   form = genreQuestion.find(`form`);
   inputs = genreQuestion.find(`input`);
-  window.HTMLMediaElement.prototype.pause = () => {};
+  (window as any).HTMLMediaElement.prototype.pause = () => {};
 
   form.simulate(`submit`, {preventDefault() {}});
 
@@ -78,7 +78,7 @@ it(`When component is rendered, inputs are synchronized with prop.selectedAnswer
       />
   );
   inputs = genreQuestion.dive().find(`input`);
-  window.HTMLMediaElement.prototype.pause = () => {};
+  (window as any).HTMLMediaElement.prototype.pause = () => {};
 
   expect(genreQuestion.prop(`selectedAnswers`)).toEqual([false, false, false, false]);
 
@@ -111,7 +111,7 @@ it(`The user's answer passed to callback and it is synchronized with prop.select
       />
   );
   form = genreQuestion.find(`form`);
-  window.HTMLMediaElement.prototype.pause = () => {};
+  (window as any).HTMLMediaElement.prototype.pause = () => {};
 
   genreQuestion.find(`input`).at(2).simulate(`change`, {
     preventDefault() {}
