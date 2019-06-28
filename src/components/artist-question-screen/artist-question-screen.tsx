@@ -1,10 +1,18 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import QuestionScreenHeader from '../question-screen-header/question-screen-header';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import {QuestionArtist, Song, AnswerArtist} from "../../types";
 
-class ArtistQuestionScreen extends PureComponent {
+interface Props {
+  onAnswer: (answer: AnswerArtist) => void,
+  renderPlayer: (song: Song, id: number) => React.ReactElement,
+  question: QuestionArtist,
+  gameTime: number,
+  mistakes: number,
+}
+
+class ArtistQuestionScreen extends React.PureComponent<Props, null> {
   render() {
     const {gameTime, mistakes, question, onAnswer, renderPlayer} = this.props;
     const {answers, song} = question;
@@ -42,24 +50,6 @@ class ArtistQuestionScreen extends PureComponent {
     </section>;
   }
 }
-
-ArtistQuestionScreen.propTypes = {
-  onAnswer: PropTypes.func.isRequired,
-  renderPlayer: PropTypes.func.isRequired,
-  question: PropTypes.shape({
-    answers: PropTypes.arrayOf(PropTypes.shape({
-      picture: PropTypes.string.isRequired,
-      artist: PropTypes.string.isRequired,
-    })),
-    song: PropTypes.shape({
-      artist: PropTypes.string.isRequired,
-      src: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  type: PropTypes.oneOf([`genre`, `artist`]),
-  gameTime: PropTypes.number.isRequired,
-  mistakes: PropTypes.number.isRequired,
-};
 
 export {ArtistQuestionScreen};
 
