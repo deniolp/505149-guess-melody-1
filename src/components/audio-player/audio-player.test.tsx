@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {AudioPlayer} from '../audio-player/audio-player';
+import {AudioPlayer} from './audio-player';
 
 describe(`AudioPlayer`, () => {
   it(`renders correctly`, () => {

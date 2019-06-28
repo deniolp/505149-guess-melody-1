@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
-import {AuthorizationScreen} from '../authorization-screen/authorization-screen';
+import {AuthorizationScreen} from './authorization-screen';
 
 describe(`AuthorizationScreen`, () => {
   it(`renders correctly`, () => {
