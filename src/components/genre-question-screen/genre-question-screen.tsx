@@ -1,12 +1,22 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import QuestionScreenHeader from '../question-screen-header/question-screen-header';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player';
 import withSelectedAnswers from '../../hocs/with-selected-answers/with-selected-answers';
 import withTransformedProps from '../../hocs/with-transformed-props/with-transformed-props';
+import {QuestionGenre, AnswerGenre} from '../../types';
 
-class GenreQuestionScreen extends PureComponent {
+interface Props {
+  onAnswer: () => void,
+  onChange: (index: number) => void,
+  renderAnswer: (answer: AnswerGenre, id: number) => void,
+  question: QuestionGenre,
+  selectedAnswers: boolean[],
+  gameTime: number,
+  mistakes: number,
+}
+
+class GenreQuestionScreen extends React.PureComponent<Props, null> {
   render() {
     const {question, gameTime, mistakes, onAnswer, renderAnswer, selectedAnswers, onChange} = this.props;
     const {answers, genre} = question;
@@ -46,23 +56,6 @@ class GenreQuestionScreen extends PureComponent {
     </section>;
   }
 }
-
-GenreQuestionScreen.propTypes = {
-  onAnswer: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  renderAnswer: PropTypes.func.isRequired,
-  question: PropTypes.shape({
-    answers: PropTypes.arrayOf(PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-    })).isRequired,
-    genre: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
-  }).isRequired,
-  gameTime: PropTypes.number.isRequired,
-  mistakes: PropTypes.number.isRequired,
-  selectedAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
-};
 
 export {GenreQuestionScreen};
 
