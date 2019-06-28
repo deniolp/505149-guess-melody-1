@@ -1,6 +1,6 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as React from 'react';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {AuthorizationScreen} from './authorization-screen';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -14,7 +14,7 @@ let submitButton;
 beforeEach(() => {
   replayClickHandler = jest.fn();
   submitClickHandler = jest.fn();
-  authorizationScreen = shallow(
+  authorizationScreen = Enzyme.shallow(
       <AuthorizationScreen
         onReplayButtonClick = {replayClickHandler}
         mistakes={2}
@@ -25,6 +25,10 @@ beforeEach(() => {
         formData={{
           name: `hdg@ya.ru`,
           password: `uy`,
+        }}
+        user={{}}
+        history={{
+          push: jest.fn()
         }}
       />);
   replayButton = authorizationScreen.find(`.replay`);

@@ -1,6 +1,6 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as React from 'react';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import GameOverScreen from '../game-over-screen/game-over-screen';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -11,7 +11,7 @@ let replayButton;
 
 beforeEach(() => {
   clickHandler = jest.fn();
-  gameOverScreen = shallow(
+  gameOverScreen = Enzyme.shallow(
       <GameOverScreen
         onReplayButtonClick={clickHandler}
       />);

@@ -1,6 +1,6 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as React from 'react';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 
 import withSelectedAnswers from './with-selected-answers';
 
@@ -34,7 +34,7 @@ const mock = {
 };
 
 it(`Should transform`, () => {
-  const wrapper = shallow(<MockWrapped
+  const wrapper = Enzyme.shallow(<MockWrapped
     answers={mock.question.answers}
     question={mock.question}
     onAnswer={jest.fn()}

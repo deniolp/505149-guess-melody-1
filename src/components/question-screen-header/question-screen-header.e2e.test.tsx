@@ -1,12 +1,12 @@
-import React from 'react';
-import {configure, mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as React from 'react';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 import QuestionScreenHeader from './question-screen-header';
 
-configure({adapter: new Adapter()});
+Enzyme.configure({adapter: new Adapter()});
 
 it(`Right amount of elements with attempts after rendering`, () => {
-  const screenHeader = mount(<QuestionScreenHeader
+  const screenHeader = Enzyme.mount(<QuestionScreenHeader
     gameTime={2}
     mistakes={2}
   />);

@@ -1,10 +1,12 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+
 import {GenreQuestionScreen} from './genre-question-screen';
+import {Type} from "../../types";
 
 const mock = {
   question: {
-    type: `genre`,
+    type: Type.GENRE,
     genre: `blues`,
     answers: [
       {

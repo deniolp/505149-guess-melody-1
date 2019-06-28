@@ -1,13 +1,15 @@
-import React from 'react';
-import {configure, mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import {ArtistQuestionScreen} from './artist-question-screen';
+import * as React from 'react';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 
-configure({adapter: new Adapter()});
+import {ArtistQuestionScreen} from './artist-question-screen';
+import {Type} from "../../types";
+
+Enzyme.configure({adapter: new Adapter()});
 
 const mocks = {
   question: {
-    type: `artist`,
+    type: Type.ARTIST,
     song: {
       artist: `Jim`,
       src: `path.mp3`,
@@ -32,7 +34,7 @@ beforeEach(() => {
   const {question} = mocks;
   onAnswer = jest.fn();
 
-  artistQuestion = mount(
+  artistQuestion = Enzyme.mount(
       <ArtistQuestionScreen
         question={question}
         gameTime={2}

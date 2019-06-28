@@ -1,15 +1,16 @@
-import React from 'react';
-import {configure, shallow, mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as React from 'react';
+import * as Enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 
 import {GenreQuestionScreen} from './genre-question-screen';
 import withSelectedAnswers from '../../hocs/with-selected-answers/with-selected-answers';
+import {Type} from "../../types";
 
-configure({adapter: new Adapter()});
+Enzyme.configure({adapter: new Adapter()});
 
 const mocks = {
   question: {
-    type: `genre`,
+    type: Type.GENRE,
     genre: `rock`,
     answers: [
       {
@@ -40,7 +41,7 @@ it(`When user clicks submit, form is not sent`, () => {
   const {question} = mocks;
   onAnswer = jest.fn();
 
-  genreQuestion = shallow(
+  genreQuestion = Enzyme.shallow(
       <GenreQuestionScreen
         question={question}
         gameTime={2}
@@ -66,7 +67,7 @@ it(`When component is rendered, inputs are synchronized with prop.selectedAnswer
   const {question} = mocks;
   onAnswer = jest.fn();
 
-  genreQuestion = shallow(
+  genreQuestion = Enzyme.shallow(
       <GenreQuestionScreenWrapped
         question={question}
         gameTime={2}
@@ -98,7 +99,7 @@ it(`The user's answer passed to callback and it is synchronized with prop.select
   const {question} = mocks;
   onAnswer = jest.fn();
 
-  genreQuestion = mount(
+  genreQuestion = Enzyme.mount(
       <GenreQuestionScreen
         question={question}
         gameTime={2}

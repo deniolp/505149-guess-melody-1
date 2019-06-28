@@ -1,5 +1,5 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
 import {AuthorizationScreen} from './authorization-screen';
@@ -17,6 +17,10 @@ describe(`AuthorizationScreen`, () => {
         formData={{
           name: `hdg@ya.ru`,
           password: `uy`,
+        }}
+        user={{}}
+        history={{
+          push: jest.fn()
         }}
       />
     </BrowserRouter>).toJSON();

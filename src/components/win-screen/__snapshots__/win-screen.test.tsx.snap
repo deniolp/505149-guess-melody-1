@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeScreen renders correctly 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Вы настоящий меломан!
+  </h2>
+  <p
+    className="result__total"
+  >
+    Вы выиграли, , совершив 
+    0
+     ошибки(-у, -ок)
+  </p>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+  >
+    Попробовать ещё раз
+  </a>
+</section>
+`;
