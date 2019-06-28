@@ -1,5 +1,4 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
@@ -16,9 +15,30 @@ import {getStep, getMistakes} from '../../reducer/game/selectors';
 import {getQuestions} from '../../reducer/data/selectors';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import withPrivateRoute from '../with-private-routes/with-private-routes';
+import {AnswerArtist, AnswerGenre, QuestionArtist, QuestionGenre} from '../../types';
+
+const settings = {
+  GAMETIME: 5,
+  ERRORCOUNT: 3,
+};
+
+type Answer = AnswerArtist | AnswerGenre | boolean[];
+type Question = QuestionGenre | QuestionArtist;
+
+interface Props {
+    gameTime: number,
+    isAuthorizationRequired: boolean,
+    errorCount: number,
+    questions: Question[],
+    step: number,
+    mistakes: number,
+    onUserAnswer: (question: Question, answer: Answer) => void,
+    onWelcomeScreenClick: () => void,
+    resetGame: () => void,
+}
 
 const withScreenSwitch = (Component) => {
-  class WithScreenSwitch extends PureComponent {
+  class WithScreenSwitch extends React.PureComponent<Props, null> {
     constructor(props) {
       super(props);
 
@@ -33,7 +53,7 @@ const withScreenSwitch = (Component) => {
           mistakes={mistakes}
         />;
 
-      return <BrowserRouter basename="/505149-guess-melody-1/11/">
+      return <BrowserRouter>
         <Switch>
           <Route path="/" exact render={() => <Component
             {...this.props}
@@ -57,9 +77,9 @@ const withScreenSwitch = (Component) => {
     }
 
     _getScreen(question) {
-      const {step, questions, onUserAnswer, mistakes, gameTime, errorCount, onWelcomeScreenClick} = this.props;
+      const {step, questions, onUserAnswer, mistakes, onWelcomeScreenClick} = this.props;
 
-      if (step > questions.length - 1 && mistakes < errorCount) {
+      if (step > questions.length - 1 && mistakes < settings.ERRORCOUNT) {
         if (this.props.isAuthorizationRequired) {
           return <Redirect to="/result" />;
         } else {
@@ -67,14 +87,14 @@ const withScreenSwitch = (Component) => {
         }
       }
 
-      if (mistakes >= errorCount) {
+      if (mistakes >= settings.ERRORCOUNT) {
         return <Redirect to="/lose" />;
       }
 
       if (step === -1) {
         return <WelcomeScreen
-          gameTime={gameTime}
-          errorCount={errorCount}
+          gameTime={settings.GAMETIME}
+          errorCount={settings.ERRORCOUNT}
           onStartButtonClick={onWelcomeScreenClick}
         />;
       }
@@ -83,7 +103,7 @@ const withScreenSwitch = (Component) => {
         case `genre`: return <GenreQuestionScreen
           key={`Genre-question-screen-${step}`}
           question={question}
-          gameTime={gameTime}
+          gameTime={settings.GAMETIME}
           mistakes={mistakes}
           onAnswer={(userAnswer) => onUserAnswer(question, userAnswer)}
         />;
@@ -91,7 +111,7 @@ const withScreenSwitch = (Component) => {
         case `artist`: return <ArtistQuestionScreen
           key={`Artist-question-screen-${step}`}
           question={question}
-          gameTime={gameTime}
+          gameTime={settings.GAMETIME}
           mistakes={mistakes}
           onAnswer={(userAnswer) => onUserAnswer(question, userAnswer)}
         />;
@@ -100,19 +120,6 @@ const withScreenSwitch = (Component) => {
       return null;
     }
   }
-
-  WithScreenSwitch.propTypes = {
-    gameTime: PropTypes.number.isRequired,
-    isAuthorizationRequired: PropTypes.bool.isRequired,
-    errorCount: PropTypes.number.isRequired,
-    onClick: PropTypes.func,
-    questions: PropTypes.array.isRequired,
-    step: PropTypes.number.isRequired,
-    mistakes: PropTypes.number.isRequired,
-    onUserAnswer: PropTypes.func.isRequired,
-    onWelcomeScreenClick: PropTypes.func.isRequired,
-    resetGame: PropTypes.func.isRequired,
-  };
 
   return WithScreenSwitch;
 };

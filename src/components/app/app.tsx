@@ -8,8 +8,6 @@ import {QuestionArtist, QuestionGenre} from "../../types";
 
 type Question = QuestionArtist | QuestionGenre;
 interface Props {
-  gameTime: number,
-  onClick: () => void,
   renderScreen: (question: Question) => React.ReactElement,
   questions: Question[],
   step: number,

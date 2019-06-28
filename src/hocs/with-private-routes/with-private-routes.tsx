@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {Redirect} from 'react-router-dom';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
@@ -8,16 +7,13 @@ import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 const withPrivateRoutes = function (Component) {
   function withProps(props) {
-    if (props.isAuthorizationRequired) {
+    const {isAuthorizationRequired} = props;
+    if (isAuthorizationRequired) {
       return <Redirect to="/sign-in" />;
     }
 
     return <Component {...props} />;
   }
-
-  withProps.propTypes = {
-    isAuthorizationRequired: PropTypes.bool.isRequired
-  };
 
   return withProps;
 };

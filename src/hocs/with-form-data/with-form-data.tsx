@@ -1,7 +1,20 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
+import {Subtract} from 'utility-types';
+
+interface State {
+  formData: {}
+}
+
+interface InjectedProps {
+  formData: string[],
+  onChangeNameInput: (evt: {target: {value: string}}) => void,
+  onChangePasswordInput: (evt: {target: {value: string}}) => void,
+}
 
 const withFormData = (Component) => {
-  class WithFormData extends PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectedProps>;
+  class WithFormData extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 

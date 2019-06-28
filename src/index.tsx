@@ -10,11 +10,6 @@ import {createAPI} from './api';
 import reducer from './reducer/main-reducer';
 import {Operation} from './reducer/data/data';
 
-const settings = {
-  GAMETIME: 5,
-  ERRORCOUNT: 3,
-};
-
 const init = () => {
   const api = createAPI(() => history.pushState(null, null, `/result`));
   const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
@@ -22,10 +17,7 @@ const init = () => {
   store.dispatch(Operation.loadQuestions());
 
   ReactDom.render(<Provider store={store}>
-    <App
-      gameTime={settings.GAMETIME}
-      errorCount={settings.ERRORCOUNT}
-    />
+    <App/>
   </Provider>,
   document.querySelector(`.main`)
   );

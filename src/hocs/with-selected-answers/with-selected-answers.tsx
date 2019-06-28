@@ -1,8 +1,27 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Subtract} from 'utility-types';
+
+interface Props {
+  answers: {
+    src: string,
+    genre: string,
+  }[],
+  onAnswer: (answers: boolean[]) => void,
+}
+interface InjectedProps {
+  selectedAnswers: boolean[],
+  onChange: (i: number) => void,
+  onAnswer: () => void,
+}
+
+interface State {
+  selectedAnswers: boolean[],
+}
 
 const withSelectedAnswers = (Component) => {
-  class WithSelectedAnswers extends PureComponent {
+  type P = Props & React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectedProps>;
+  class WithSelectedAnswers extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
       this.state = {
@@ -35,18 +54,6 @@ const withSelectedAnswers = (Component) => {
       this.props.onAnswer(this.state.selectedAnswers);
     }
   }
-
-  WithSelectedAnswers.propTypes = {
-    question: PropTypes.shape({
-      answers: PropTypes.arrayOf(PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired,
-      })).isRequired,
-      genre: PropTypes.string.isRequired,
-      type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
-    }).isRequired,
-    onAnswer: PropTypes.func.isRequired,
-  };
 
   return WithSelectedAnswers;
 };
