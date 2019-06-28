@@ -1,5 +1,4 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link, withRouter} from "react-router-dom";
 
@@ -7,7 +6,19 @@ import {Operation} from '../../reducer/user/user';
 import {getAuthError, getUser} from '../../reducer/user/selectors';
 import withFormData from '../../hocs/with-form-data/with-form-data';
 
-class AuthorizationScreen extends PureComponent {
+interface Props {
+  onReplayButtonClick: () => void,
+  onChangeNameInput: () => void,
+  onChangePasswordInput: () => void,
+  mistakes: number,
+  authError: string,
+  history: {push: (path: string) => void},
+  user: {},
+  formData: {name: string, password: string},
+  submitForm: (name: string, password: string) => void;
+}
+
+class AuthorizationScreen extends React.PureComponent<Props, null> {
   constructor(props) {
     super(props);
 
@@ -61,18 +72,6 @@ class AuthorizationScreen extends PureComponent {
     }}>{authError}</span> : ``;
   }
 }
-
-AuthorizationScreen.propTypes = {
-  submitForm: PropTypes.func.isRequired,
-  onChangePasswordInput: PropTypes.func,
-  onChangeNameInput: PropTypes.func,
-  onReplayButtonClick: PropTypes.func.isRequired,
-  mistakes: PropTypes.number.isRequired,
-  authError: PropTypes.string,
-  user: PropTypes.object,
-  formData: PropTypes.objectOf(PropTypes.string),
-  history: PropTypes.object,
-};
 
 const mapStateToProps = (state) => ({
   authError: getAuthError(state),

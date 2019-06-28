@@ -1,8 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-const WelcomeScreen = (props) => {
-  const {gameTime, errorCount, onStartButtonClick} = props;
+interface Props {
+  onStartButtonClick: () => void,
+  gameTime: number,
+  errorCount: number,
+}
+
+const WelcomeScreen = ({gameTime, errorCount, onStartButtonClick}: Props) => {
 
   return <section className="welcome">
     <div className="welcome__logo">
@@ -19,12 +23,6 @@ const WelcomeScreen = (props) => {
     </ul>
     <p className="welcome__text">Удачи!</p>
   </section>;
-};
-
-WelcomeScreen.propTypes = {
-  gameTime: PropTypes.number.isRequired,
-  errorCount: PropTypes.number.isRequired,
-  onStartButtonClick: PropTypes.func,
 };
 
 export default WelcomeScreen;

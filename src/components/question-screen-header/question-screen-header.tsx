@@ -1,8 +1,12 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import MistakeSigns from '../mistake-signs/mistake-signs';
 
-class QuestionScreenHeader extends PureComponent {
+interface Props {
+  gameTime: number,
+  mistakes: number,
+}
+
+class QuestionScreenHeader extends React.PureComponent<Props, null> {
   render() {
     const {gameTime, mistakes} = this.props;
 
@@ -21,7 +25,7 @@ class QuestionScreenHeader extends PureComponent {
           }}/>
       </svg>
 
-      <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
+      <div className="timer__value">
         <span className="timer__mins">0{gameTime}</span>
         <span className="timer__dots">:</span>
         <span className="timer__secs">00</span>
@@ -30,10 +34,5 @@ class QuestionScreenHeader extends PureComponent {
     </header>;
   }
 }
-
-QuestionScreenHeader.propTypes = {
-  gameTime: PropTypes.number.isRequired,
-  mistakes: PropTypes.number.isRequired,
-};
 
 export default QuestionScreenHeader;

@@ -1,7 +1,10 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-class MistakeSigns extends PureComponent {
+interface Props {
+  mistakes: number,
+}
+
+class MistakeSigns extends React.PureComponent<Props, null> {
   render() {
     const {mistakes} = this.props;
     return <div className="game__mistakes">
@@ -17,9 +20,5 @@ class MistakeSigns extends PureComponent {
     return mistakesElements;
   }
 }
-
-MistakeSigns.propTypes = {
-  mistakes: PropTypes.number.isRequired,
-};
 
 export default MistakeSigns;
